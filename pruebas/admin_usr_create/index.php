@@ -4,10 +4,6 @@ session_start();
     include("functions.php");
 
     $user_data = check_login($con);
-    if(!$user_data['admin'])
-    {
-        header('Location: usr_view.php');
-    }
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +17,14 @@ session_start();
     <a href="logout.php">LogOut</a>
     <h1>INDEX</h1>
     <p>Hello, <?php echo $user_data['username'];?>.</p>
-
-    
+    <?php
+        if($user_data['admin'])
+        {
+            echo "The user is Admin";
+        } else 
+        {
+            echo "The user isn't Admin";
+        }
+    ?>
 </body>
 </html>

@@ -12,7 +12,7 @@ session_start();
         if(!is_numeric($username))
         {
             //leer de la base de datos
-            $query ="SELECT * FROM usuarios WHERE username = '$username' LIMIT 1";
+            $query ="SELECT * FROM users_admin WHERE username = '$username' LIMIT 1";
             $result = mysqli_query($con, $query);
 
             if($result)
@@ -29,11 +29,7 @@ session_start();
                 }
             }
         }
-    }else
-    {
-        echo 'Introduce informacion valida';
     }
-
 
 ?>
 

@@ -8,36 +8,33 @@ session_start();
         //something was posted
         $username = $_POST['username'];
         $passwd = $_POST['passwd'];
+        $admin = isset($_POST['admin']) ? true : false;
 
         if(!is_numeric($username))
         {
-            //leer de la base de datos
-            $query ="SELECT * FROM users_admin WHERE username = '$username' LIMIT 1";
-            $result = mysqli_query($con, $query);
+            //guardar en la base de datos
+            $user_id = random_num(2);
+            $query ="insert into users_admin (user_id,username, passwd, admin) values('$user_id','$username','$passwd','$admin')";
+            mysqli_query($con, $query);
 
-            if($result)
-            {
-                if($result && mysqli_num_rows($result) > 0)
-                {
-                    $user_data = mysqli_fetch_assoc($result);
-                    if($user_data['passwd'] === $passwd)
-                    {
-                        $_SESSION['user_id'] =$user_data['user_id'];
-                        header("Location: index.php");
-                        die;
-                    }
-                }
-            }
+            header("Location: login.php");
+            die;
+
+        }else
+        {
+            echo 'Introduce informacion valida';
         }
+
     }
 ?>
+
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Iniciar Sesión</title>
+    <title>Registrar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link href="includes/style.css" rel="stylesheet">
@@ -45,15 +42,16 @@ session_start();
 
 <body>
     <div class="container">
-        <div class="form-box" id="login-form">
+        <div class="form-box" id="register-form">
             <form method="post">
-                
-                <h2>Inicia Sesión</h2>
+                <h2>Registrate</h2>
                 <input type="text" name="username" placeholder="Nombre de usuario..." required>
                 <input type="text" name="passwd" placeholder="Contraseña..." required>
-                <input type="submit" value="Iniciar Sesión" class="button">
-                <p>¿No tienes una cuenta? <a href="register.php">¡Registrate!</a></p> 
-            
+                <input class="form-check-input mt-0" type="checkbox" value="admin" id="admin">
+                <label for="admin">Administrador</label>
+                <input type="submit" value="Registrar" class="button">
+                <p>¿Ya tienes una cuenta? <a href="login.php">¡Inicia sesión!</a></p> 
+
             </form>
         </div>
     </div>
