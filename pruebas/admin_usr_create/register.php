@@ -6,18 +6,22 @@ session_start();
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
         //something was posted
+        $name = $_POST['name'];
+        $surname1 = $_POST['surname1'];
+        $surname2 = $_POST['surname2'];
+        $dni = $_POST['dni'];
         $username = $_POST['username'];
         $passwd = $_POST['passwd'];
-        $admin = isset($_POST['admin']) ? true : false;
+        $admin = isset($_POST['admin']) ? 1 : 0;
 
         if(!is_numeric($username))
         {
             //guardar en la base de datos
             $user_id = random_num(2);
-            $query ="insert into users_admin (user_id,username, passwd, admin) values('$user_id','$username','$passwd','$admin')";
+            $query ="insert into users_prueba (user_id,username, passwd, nombre, 1apellido, 2apellido, dni, admin) values('$user_id','$username','$passwd','$name','$surname1','$surname2','$dni','$admin')";
             mysqli_query($con, $query);
 
-            header("Location: login.php");
+            header("Location: successful.php");
             die;
 
         }else
@@ -45,9 +49,13 @@ session_start();
         <div class="form-box" id="register-form">
             <form method="post">
                 <h2>Registrate</h2>
+                <input type="text" name="name" placeholder="Nombre(s)..." >
+                <input type="text" name="surname1" placeholder="Primer apellido..." >
+                <input type="text" name="surname2" placeholder="Segundo apellido..." >
+                <input type="text" name="dni" placeholder="DNI..." >
                 <input type="text" name="username" placeholder="Nombre de usuario..." required>
                 <input type="text" name="passwd" placeholder="Contraseña..." required>
-                <input class="form-check-input mt-0" type="checkbox" value="admin" id="admin">
+                <input class="form-check-input mt-0" type="checkbox" name="admin" id="checkbox">
                 <label for="admin">Administrador</label>
                 <input type="submit" value="Registrar" class="button">
                 <p>¿Ya tienes una cuenta? <a href="login.php">¡Inicia sesión!</a></p> 

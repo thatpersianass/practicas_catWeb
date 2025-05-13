@@ -29,7 +29,7 @@ session_start();
             <span class="icon_user">
                 <i class="bi bi-person"></i>
             </span>
-            <span class="description"><?php echo $user_data['username'];?></span>
+            <span class="description"><?php echo $user_data['nombre']; echo " "; echo $user_data['1apellido']; echo " "; echo $user_data['2apellido'];?></span>
         </nav>
 
         <nav class="nav flex-column">
@@ -49,9 +49,8 @@ session_start();
                 </span>
                 <span class="description">Salir</span>
             </a>
-
-        
         </nav>
+        USUARIO NORMAL
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
