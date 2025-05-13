@@ -3,39 +3,6 @@ session_start();
     include("connection.php");
     include("functions.php");
 
-    if($_SERVER['REQUEST_METHOD'] == "POST")
-    {
-        //something was posted
-        $username = $_POST['username'];
-        $passwd = $_POST['passwd'];
-
-        if(!is_numeric($username))
-        {
-            //leer de la base de datos
-            $query ="SELECT * FROM users_prueba WHERE username = '$username' LIMIT 1";
-            $result = mysqli_query($con, $query);
-
-            if($result)
-            {
-                if($result && mysqli_num_rows($result) > 0)
-                {
-                    $user_data = mysqli_fetch_assoc($result);
-                    if($user_data['passwd'] === $passwd)
-                    {
-                        if($user_data['admin']){
-                            $_SESSION['user_id'] =$user_data['user_id'];
-                            header("Location: index.php");
-                            die;
-                        } else {
-                            $_SESSION['user_id'] =$user_data['user_id'];
-                            header("Location: usr_view.php");
-                            die;
-                        }
-                    }
-                }
-            }
-        }
-    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -55,8 +22,8 @@ session_start();
             <form method="post">
                 
                 <h2>¡Registro exitoso!</h2>
-                <p><b class="user_registered">x</b> ha sido registrado con exito</p> 
-                <p> Ahora <a href="login.php">vuelve al inicio de sesión</a> para empezar a subir tus archivos!</p>
+                <p><b class="user_registered"><?php echo $_SESSION['last_username']; ?></b> ha sido registrado con exito</p> 
+                <p>¡Ahora <a href="login.php">vuelve al inicio de sesión</a> para empezar a subir tus archivos!</p>
                 
             
             </form>

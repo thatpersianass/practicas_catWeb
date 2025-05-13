@@ -1,62 +1,45 @@
-<?php
-session_start();
-    include("connection.php");
-    include("functions.php");
-
-    $user_data = check_login($con);
-?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Archivos</title>
-
-    <link rel="stylesheet" href="includes\sidebar.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Adminisrador</title>
+    <link rel="stylesheet" href="includes/sidebar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body>
-
-    <!-- Sidebar -->
-
-    <div class="sidebar">
-        <nav class="nav flex-column usershow">
-            <span class="icon_user">
-                <i class="bi bi-person"></i>
-            </span>
-            <span class="description"><?php echo $user_data['username'];?></span>
-        </nav>
-
-        <nav class="nav flex-column">
-            <a href="#" class="nav-link active">
-                <span class="icon">
+    <div class="side-menu">
+        <div class="brand-name">
+            <h2>Panel de Administrador</h2>
+        </div>
+        <ul>
+            <li><span class="icon">
                     <i class="bi bi-search"></i>
-                </span>
-                <span class="description">Buscar usuarios</span>
-            </a>
-        </nav>
-
-    <!-- Sidebar dropdown -->
-        <nav class="nav flex-column">
-            <a href="logout.php" class="nav-link">
-                <span class="icon">
-                    <i class="bi bi-box-arrow-left"></i>
-                </span>
-                <span class="description">Salir</span>
-            </a>
-
-        
-        </nav>
+                </span></i>&nbsp; Buscar</li>
+            <li><span class="icon">
+                    <i class="bi bi-door-open"></i>
+                </span>&nbsp; Cerrar Sesión</li>
+        </ul>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
-    </script>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <div class="search">
+                    <input type="text" placeholder="Buscar usuario...">
+                    <button type="submit"><span class="icon">
+                            <i class="bi bi-search"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="user">
+                    <a href="#" class="btn">Add New</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

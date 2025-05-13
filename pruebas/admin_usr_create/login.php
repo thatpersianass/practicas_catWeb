@@ -53,13 +53,26 @@ session_start();
     <div class="container">
         <div class="form-box" id="login-form">
             <form method="post">
-                
+
                 <h2>Inicia Sesión</h2>
                 <input type="text" name="username" placeholder="Nombre de usuario..." required>
-                <input type="text" name="passwd" placeholder="Contraseña..." required>
+                <input type="password" name="passwd" placeholder="Contraseña..." id="passwd" required>
+                <label for="admin">Mostrar contraseña</label>
+                <input class="form-check-input mt-0 align-end" type="checkbox" name="admin" id="checkbox" onclick="mostrarContrasenia()">
                 <input type="submit" value="Iniciar Sesión" class="button">
-                <p>¿No tienes una cuenta? <a href="register.php">¡Registrate!</a></p> 
-            
+                <p>¿No tienes una cuenta? <a href="register.php">¡Registrate!</a></p>
+
+                <script type="text/javascript">
+                function mostrarContrasenia() {
+                    var x = document.getElementById("passwd");
+                    if (x.type === "password") {
+                        x.type = "text";
+                    } else {
+                        x.type = "password";
+                    }
+                }
+                </script>
+
             </form>
         </div>
     </div>
@@ -67,4 +80,5 @@ session_start();
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
     </script>
 </body>
+
 </html>
