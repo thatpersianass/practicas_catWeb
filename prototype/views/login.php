@@ -1,7 +1,7 @@
 <?php
 session_start();
-    include("connection.php");
-    include("functions.php");
+    include("../include/connection.php");
+    include("../include/functions.php");
 
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
@@ -12,7 +12,7 @@ session_start();
         if(!is_numeric($username))
         {
             //leer de la base de datos
-            $query ="SELECT * FROM users_prueba WHERE username = '$username' LIMIT 1";
+            $query ="SELECT * FROM users WHERE username = '$username' LIMIT 1";
             $result = mysqli_query($con, $query);
 
             if($result)
@@ -24,11 +24,11 @@ session_start();
                     {
                         if($user_data['admin']){
                             $_SESSION['user_id'] =$user_data['user_id'];
-                            header("Location: index.php");
+                            header("Location: admin/admin_view.php");
                             die;
                         } else {
                             $_SESSION['user_id'] =$user_data['user_id'];
-                            header("Location: usr_view.php");
+                            header("Location: user/usr_view.php");
                             die;
                         }
                     }
@@ -46,7 +46,7 @@ session_start();
     <title>Iniciar Sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link href="includes/style.css" rel="stylesheet">
+    <link href="../style/login.css" rel="stylesheet">
 </head>
 
 <body>

@@ -8,6 +8,6 @@ if(isset($_SESSION['user_id']))
 
 // session_unset();
 // seission_destroy();
-header("Location:login.php");
+header("Location:../views/login.php");
 die;
 ?>

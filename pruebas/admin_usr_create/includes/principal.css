@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1,h2{
+    color: white;
+}
+
+.btn {
+    background:  hsla(134, 36%, 53%, 1) 100%;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+}
+.btn:hover {
+    color: rgb(103, 193, 127);
+    background:  white;
+    padding: 3px 8px;
+    border: 2px solid #67c17f;
+}
+
+.side-menu {
+    position: fixed;
+    background: hsla(148, 89%, 78%, 1);
+    background: linear-gradient(90deg, hsla(148, 89%, 78%, 1) 0%, hsla(210, 81%, 22%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(148, 89%, 78%, 1) 0%, hsla(210, 81%, 22%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(148, 89%, 78%, 1) 0%, hsla(210, 81%, 22%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#95F9C3", endColorstr="#0B3866", GradientType=1 );
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu .brand_name {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-menu li {
+    font-size: 24px;
+    padding: 10px 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.side-menu li:hover {
+    background: rgba(255,255,255,0.25);
+    color: hsla(148, 89%, 78%, 1) 0%;
+}
+
+.container {
+    position: absolute;
+    right: 0;
+    width: 80vw;
+    height: 100vh;
+    background: hsla(59, 86%, 68%, 1);
+    background: linear-gradient(90deg, hsla(59, 86%, 68%, 1) 0%, hsla(134, 36%, 53%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(59, 86%, 68%, 1) 0%, hsla(134, 36%, 53%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(59, 86%, 68%, 1) 0%, hsla(134, 36%, 53%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F4F269", endColorstr="#5CB270", GradientType=1 );
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    width: 80vw;
+    height: 10vh;
+    background: white;
+}
+
+.container .nav {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.container .nav .search {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+
+}
+
+.container .nav .search input[type=text]{
+    border: none;
+    background: #f1f1f1;
+    padding: 10px;
+    width: 50%;
+}
+
+.container .nav .search button{
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1
+}
+
+.container .nav .user {
+    flex: 1;
+    background: white;
+}
+
+.container .nav .user .icon_user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 100%;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20vw;
+    background: rgb(110, 152, 187);
+    font-family: 'Poppins';
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    padding: 20px 0;
+}
+
+.sidebar .nav-link{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(255,255,255, 0.15);
+    color:#fff;
+    border-radius: 20px;
+    transition: all 0.1s ease-in;
+}
+
+.sidebar .nav-link:focus {
+    color: #fff;
+}
+
+.sidebar .description {
+    font-size: 16px;
+}
+
+.sidebar .icon{
+    font-size: 18px;
+}
+
+.sidebar .active {
+    background-color: rgba(255,255,255, 0.25);
+    color:#fff;
+    border-radius: 20px;
+    transition: all 0.3s ease-in;
+    font-weight: 500;
+}
+
+.sidebar .active:hover {
+    background-color: rgba(255,255,255, 0.35);
+    color:#fff;
+    transition: all 0.3s ease-in;
+}
+
+.sidebar .usershow {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.sidebar .icon_user {
+    font-size: 100px;
+    margin-bottom: 0;
+}
+
+/* Principal */
+
+.container {
+    flex: 1;
+    margin-left: 20vw; /* Igual al ancho del sidebar */
+    width: calc(100vw - 20vw); /* Calcula el ancho restante */
+    min-height: 100vh;
+    background: rgb(239, 248, 255);
+}
+
+.container .header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 86vw;
+    height: 10vh;
+    background:  rgb(209, 235, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.container .header .nav {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.container .nav .search {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+}
+
+.container .nav .search input[type=text]{
+    border: none;
+    background: #fff;
+    padding: 10px;
+    width: 50%;
+}
+
+.container .nav .search button{
+    width: 40px;
+    height: 50px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
