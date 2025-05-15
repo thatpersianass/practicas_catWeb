@@ -35,7 +35,7 @@ function random_num($length)
     return $text;
 }
 
-function fetch_folders($user_details,$con){
+function fetch_folders($user_data,$user_details,$con){
     $user_id = $user_details['user_id'];
 
     $query = "SELECT * FROM folders WHERE user_id = '$user_id'";
@@ -56,6 +56,7 @@ function fetch_folders($user_details,$con){
                     $name = $row['name'];
             ?>
     <div class="folder">
+        <?php if($user_data['admin']){ ?>
         <a href="../../include/updates/update_folder_admin.php?folder=<?php echo urlencode($id); ?>">
             <div class="img-folder">
                 <img src="../../img/folder.webp" alt="folder.webp" class="folder-img">
@@ -64,6 +65,16 @@ function fetch_folders($user_details,$con){
                 <?php echo $name; ?>
             </div>
         </a>
+        <?php } else { ?>
+        <a href="../../include/updates/update_folder_usr.php?folder=<?php echo urlencode($id); ?>">
+            <div class="img-folder">
+                <img src="../../img/folder.webp" alt="folder.webp" class="folder-img">
+            </div>
+            <div class="description">
+                <?php echo $name; ?>
+            </div>
+        </a>
+        <?php } ?>
     </div>
     <?php } ?>
 </div>
@@ -102,10 +113,10 @@ function fetch_files($user_details,$con){
                     $size = $row['size'];
                     $date = $row['date'];
             ?>
-    <div class="folder">
+    <div class="file">
         <a href="../../uploads/<?php echo $user_id; ?>/<?php echo $real_name; ?>">
-            <div class="img-folder">
-                <img src="../../img/file.webp" alt="file.webp" class="folder-img">
+            <div class="img-file">
+                <img src="../../img/file.webp" alt="file.webp" class="file-img">
             </div>
             <div class="description">
                 <?php echo $name; ?>

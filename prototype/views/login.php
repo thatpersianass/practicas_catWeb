@@ -31,7 +31,11 @@ session_start();
                             header("Location: user/usr_view.php");
                             die;
                         }
+                    }else {
+                        echo '<h6>Contraseña Incorrecta</h6>';
                     }
+                } else {
+                    echo '<h6>Este usuario no existe</h6>';
                 }
             }
         }

@@ -38,7 +38,7 @@ session_start();
                     <span class="icon">
                         <i class="bi bi-folder"></i>
                     </span>
-                    <span class="description">Archivos</span>
+                    <span class="description">Carpetas</span>
                 </a>
             </nav>
 

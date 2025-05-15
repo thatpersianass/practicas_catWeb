@@ -236,7 +236,6 @@ header .title-panel {
 
 .content .files-box .folder {
     cursor: pointer;
-    width: 140px;
     margin: 10px 20px;
     gap: 20px;
     display: flex;
@@ -261,5 +260,28 @@ header .title-panel {
 
 .content .files-box .folders-box-inner {
     display: flex;
-    justify-content: space-between;
+}
+
+.content .files-box .file {
+    cursor: pointer;
+    margin: 10px 20px;
+    gap: 20px;
+    display: flex;
+    text-align: center;
+    border-radius: 4px;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.content .files-box .file:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.content .files-box .file .file-img {
+    height: 100px;
+}
+
+.content .files-box .file a {
+    text-decoration: none;
+    color: #000;
 }

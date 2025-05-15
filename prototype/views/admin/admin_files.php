@@ -52,7 +52,7 @@ session_start();
                     <span class="icon">
                         <i class="bi bi-folder"></i>
                     </span>
-                    <span class="description">Archivos</span>
+                    <span class="description">Carpetas</span>
                 </a>
             </nav>
 
@@ -68,7 +68,7 @@ session_start();
 
         <main class="content">
             <div class="files-box">
-                <?php fetch_folders($user_details,$con) ?>
+                <?php fetch_folders($user_data, $user_details,$con) ?>
             </div>
 
             <div class="add-folder">

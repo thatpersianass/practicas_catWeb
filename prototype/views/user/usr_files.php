@@ -34,9 +34,18 @@ session_start();
             </nav>
 
             <nav class="nav flex-column">
-                <a href="#" class="nav-link active">
+                <a href="usr_view.php" class="nav-link">
                     <span class="icon">
                         <i class="bi bi-folder"></i>
+                    </span>
+                    <span class="description">Carpetas</span>
+                </a>
+            </nav>
+
+            <nav class="nav flex-column">
+                <a href="#" class="nav-link active">
+                    <span class="icon">
+                        <i class="bi bi-file-earmark"></i>
                     </span>
                     <span class="description">Archivos</span>
                 </a>
@@ -54,7 +63,7 @@ session_start();
 
         <main class="content">
             <div class="files-box">
-                <?php fetch_folders($user_data,$con) ?>
+                <?php fetch_files($user_data,$con) ?>
             </div>
         </main>
 
