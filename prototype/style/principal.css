@@ -168,6 +168,7 @@ header .title-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: center; */
 }
 
 .content .title-panel {
@@ -182,6 +183,9 @@ header .title-panel {
     gap: 20px;
     width: 60vw;
     padding: 10px 20px;
+    justify-items: center;
+    align-items: center;
+    display: flex;
 }
 
 .content .search-box input{
@@ -260,32 +264,58 @@ header .title-panel {
 
 .content .files-box .folders-box-inner {
     display: flex;
+    width: 100%;
 }
 
-.content .files-box .file {
-    cursor: pointer;
+.content .files-box {
+    /* cursor: pointer; */
     margin: 10px 20px;
     gap: 20px;
     display: flex;
     text-align: center;
     border-radius: 4px;
     padding: 20px;
-    transition: all 0.3s;
 }
 
-.content .files-box .file:hover {
+/* .content .files-box:hover {
     background-color: rgba(0, 0, 0, 0.1);
+} */
+
+
+.content .files-box .file-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.content .files-box .file .file-img {
+.content .files-box .file-info .description {
+    font-size: 30px;
+}
+
+.content .files-box .created-at {
+    color: rgb(122, 122, 122);
+}
+
+.content .files-box .file-img {
     height: 100px;
 }
 
-.content .files-box .file a {
-    text-decoration: none;
-    color: #000;
+.content .files-box .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.content .files-box .file .download-file {
+.content .files-box .download-file {
+    margin-top: 10px;
     margin-bottom: 30px;
+}
+
+.content .add-folder {
+    margin: 20px;
+}
+
+.content .files-box .search-box input {
+    background-color: rgb(241, 241, 241);
 }

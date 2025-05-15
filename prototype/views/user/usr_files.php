@@ -63,9 +63,14 @@ session_start();
 
         <main class="content">
             <div class="files-box">
+                <div class="title-panel">
+                    Tus archivos
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Introduce el nombre del archivo...">
+                </div>
                 <?php fetch_files($user_data,$user_data,$con) ?>
             </div>
-        </main>
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"

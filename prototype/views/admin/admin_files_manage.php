@@ -77,16 +77,23 @@ session_start();
 
         <main class="content">
             <div class="files-box">
+                <div class="title">
+                    <span class="title-panel">Archivos de <?php echo $user_details['name']?>
+                        <?php echo $user_details['1surname']?>
+                        <?php echo $user_details['2surname']?></span>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Introduce el nombre del archivo...">
+                    <div class="add-file">
+                        <a href="#" class="button-primary" data-bs-toggle="modal" data-bs-target="#insertdata">
+                            <span class="icon">
+                                <i class="bi bi-file-earmark-plus"></i>
+                            </span>
+                            <span class="description">Añadir archivo</span>
+                        </a>
+                    </div>
+                </div>
                 <?php fetch_files($user_data,$user_details,$con) ?>
-            </div>
-
-            <div class="add-folder">
-                <a href="#" class="button-primary" data-bs-toggle="modal" data-bs-target="#insertdata">
-                    <span class="icon">
-                        <i class="bi bi-file-earmark-plus"></i>
-                    </span>
-                    <span class="description">Añadir archivo</span>
-                </a>
             </div>
         </main>
         </script>
