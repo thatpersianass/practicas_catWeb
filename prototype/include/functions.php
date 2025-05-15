@@ -89,7 +89,7 @@ function fetch_folders($user_data,$user_details,$con){
 }
 }
 
-function fetch_files($user_details,$con){
+function fetch_files($user_data,$user_details,$con){
     $folder_id = $_SESSION['folder_selected'];
 
     $query = "SELECT * FROM files WHERE folder_id = '$folder_id'";
@@ -116,10 +116,28 @@ function fetch_files($user_details,$con){
     <div class="file">
         <a href="../../uploads/<?php echo $user_id; ?>/<?php echo $real_name; ?>">
             <div class="img-file">
-                <img src="../../img/file.webp" alt="file.webp" class="file-img">
+                <img src="../../img/<?php echo $type;?>.webp" alt="file.webp" class="file-img">
             </div>
             <div class="description">
                 <?php echo $name; ?>
+            </div>
+            <div class="buttons">
+                <div class="download-file">
+                    <a href="../../uploads/<?php echo $user_id; ?>/<?php echo $real_name; ?>" class="button-primary">
+                        <span class="icon">
+                            <i class="bi bi-eye"></i>
+                        </span>
+                    </a>
+                </div>
+            <?php if($user_data['admin']){ ?>
+                <div class="delete-file">
+                    <a href="admin_files_manage.php?delete" class="button-delete">
+                        <span class="icon">
+                            <i class="bi bi-trash"></i>
+                        </span>
+                    </a>
+                </div>
+            <?php }?>
             </div>
         </a>
     </div>

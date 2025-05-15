@@ -37,7 +37,7 @@ if(isset($_POST['input'])){
                     </span>
                     <span class="description">Detalles</a></span>
                     
-                    <a href="#" class="button-delete">
+                    <a href="../../include/delete_user.php" class="button-delete">
                         <span class="icon">
                             <i class="bi bi-person-dash"></i>
                         </span>

@@ -285,3 +285,7 @@ header .title-panel {
     text-decoration: none;
     color: #000;
 }
+
+.content .files-box .file .download-file {
+    margin-bottom: 30px;
+}

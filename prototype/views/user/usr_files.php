@@ -63,7 +63,7 @@ session_start();
 
         <main class="content">
             <div class="files-box">
-                <?php fetch_files($user_data,$con) ?>
+                <?php fetch_files($user_data,$user_data,$con) ?>
             </div>
         </main>
 

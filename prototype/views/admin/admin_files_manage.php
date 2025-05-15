@@ -77,7 +77,7 @@ session_start();
 
         <main class="content">
             <div class="files-box">
-                <?php fetch_files($user_details,$con) ?>
+                <?php fetch_files($user_data,$user_details,$con) ?>
             </div>
 
             <div class="add-folder">
