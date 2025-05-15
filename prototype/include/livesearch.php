@@ -5,7 +5,7 @@ if(isset($_POST['input'])){
 
     $input = $_POST['input'];
 
-    $query = "SELECT * FROM users WHERE name LIKE '{$input}%' OR dni LIKE '{$input}%'";
+    $query = "SELECT * FROM users WHERE name LIKE '{$input}%' OR 1surname LIKE '{$input}%' OR 2surname LIKE '{$input}%' OR dni LIKE '{$input}%'";
 
     $result = mysqli_query($con,$query);
 

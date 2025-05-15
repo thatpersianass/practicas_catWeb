@@ -10,7 +10,7 @@ if(isset($_POST['save_data']))
         $surname2 = $_POST['surname2'];
         $dni = $_POST['dni'];
         $username = $_POST['username'];
-        $passwd = $_POST['passwd'];
+        $passwd = password_hash($_POST['passwd'], PASSWORD_DEFAULT);
         $admin = isset($_POST['admin']) ? 1 : 0;
 
         if(!is_numeric($username))

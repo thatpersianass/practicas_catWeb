@@ -20,7 +20,7 @@ session_start();
                 if($result && mysqli_num_rows($result) > 0)
                 {
                     $user_data = mysqli_fetch_assoc($result);
-                    if($user_data['passwd'] === $passwd)
+                    if(password_verify($passwd, $user_data['passwd']))
                     {
                         if($user_data['admin']){
                             $_SESSION['user_id'] =$user_data['user_id'];
