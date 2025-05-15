@@ -14,14 +14,18 @@ if(isset($_POST['submit'])) {
 
     if(in_array($fileActualExt, $allowed)){
         if($fileError === 0){
-            if($fileSize < 1000000){
-                $fileNameNew = uniqid('', true).".".$fileActualExt;
+            if($fileSize < 10000000000000){
 
-                $fileDestination = 'uploads/'.$fileNameNew;
+                $uploadDir = 'uploads/coocoo/';
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0777, true); // true permite crear directorios anidados
+                }
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = $uploadDir.$fileNameNew;
 
                 move_uploaded_file($fileTmpName, $fileDestination);
 
-                header("Location: index.php?uploadsuccess");
+                header("Location: $fileDestination/$fileTmpname");
             } else {
                 echo "The file is too big!";
             }

@@ -224,14 +224,42 @@ header .title-panel {
 
 /* Visualización de archivos */
 .content .files-box {
+    margin: 20px;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     background: white;
     width: 50vw;
-    height: 50vh;
-    border-radius: 4px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.content .files-box .folder-img {
-    height: 40px;
+.content .files-box .folder {
+    cursor: pointer;
+    width: 140px;
+    margin: 10px 20px;
+    gap: 20px;
+    display: flex;
+    text-align: center;
+    border-radius: 4px;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.content .files-box .folder:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.content .files-box .folder .folder-img {
+    height: 100px;
+}
+
+.content .files-box .folder a {
+    text-decoration: none;
+    color: #000;
+}
+
+.content .files-box .folders-box-inner {
+    display: flex;
+    justify-content: space-between;
 }

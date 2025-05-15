@@ -31,7 +31,7 @@ if(isset($_POST['input'])){
         <tr>
             <td><?php echo $name;?> <?php echo $surname1;?> <?php echo $surname2;?><br><b class="dni"><?php echo $dni;?></b></td>
             <td class="details">
-                <a href="../../include/update_session.php?user=<?php echo urlencode($username); ?>" class="button-primary" id="<?php echo $username; ?>">
+                <a href="../../include/updates/update_session.php?user=<?php echo urlencode($username); ?>" class="button-primary" id="<?php echo $username; ?>">
                     <span class="icon">
                         <i class="bi bi-file-person"></i>
                     </span>

@@ -53,7 +53,9 @@ session_start();
         </aside>
 
         <main class="content">
-            
+            <div class="files-box">
+                <?php fetch_folders($user_data,$user_data,$con) ?>
+            </div>
         </main>
 
     </script>

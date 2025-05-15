@@ -35,16 +35,93 @@ function random_num($length)
     return $text;
 }
 
+function fetch_folders($user_details,$con){
+    $user_id = $user_details['user_id'];
 
-function get_user_details($username,$con) {
-    $query = "SELECT * FROM users WHERE username = '$username' limit 1";
-    $result = mysqli_query($con, $query);
+    $query = "SELECT * FROM folders WHERE user_id = '$user_id'";
 
-    if($result && mysqli_num_rows($result) > 0)
-        {
-            $user_data = mysqli_fetch_assoc($result);
-            return $user_data; 
-        }
+    $result = mysqli_query($con,$query);
+
+    if(mysqli_num_rows($result) > 0){?>
+<div class="title">
+    <span class="title-panel">Carpetas de <?php echo $user_details['name']?> <?php echo $user_details['1surname']?>
+        <?php echo $user_details['2surname']?></span>
+</div>
+<div class="folders-box-inner">
+    <?php
+                while($row = mysqli_fetch_assoc($result)){
+
+                    $id = $row['id'];
+                    $user_id = $row['user_id'];
+                    $name = $row['name'];
+            ?>
+    <div class="folder">
+        <a href="../../include/updates/update_folder_admin.php?folder=<?php echo urlencode($id); ?>">
+            <div class="img-folder">
+                <img src="../../img/folder.webp" alt="folder.webp" class="folder-img">
+            </div>
+            <div class="description">
+                <?php echo $name; ?>
+            </div>
+        </a>
+    </div>
+    <?php } ?>
+</div>
+<?php } else {
+    ?>
+<div class="title">
+    <span class="title-panel">Carpetas de <?php echo $user_details['name']?> <?php echo $user_details['1surname']?>
+        <?php echo $user_details['2surname']?></span>
+</div>
+<?php
+    echo "<h6 class='ext-danger text-center'> Este usuario no tiene carpetas creadas... </h6>";
+}
 }
 
+function fetch_files($user_details,$con){
+    $folder_id = $_SESSION['folder_selected'];
+
+    $query = "SELECT * FROM files WHERE folder_id = '$folder_id'";
+
+    $result = mysqli_query($con,$query);
+
+    if(mysqli_num_rows($result) > 0){?>
+<div class="title">
+    <span class="title-panel">Archivos de <?php echo $user_details['name']?> <?php echo $user_details['1surname']?>
+        <?php echo $user_details['2surname']?></span>
+</div>
+<div class="folders-box-inner">
+    <?php
+                while($row = mysqli_fetch_assoc($result)){
+
+                    $id = $row['id'];
+                    $name = $row['name'];
+                    $real_name = $row['real_name'];
+                    $type = $row['type'];
+                    $user_id = $row['user_id'];
+                    $size = $row['size'];
+                    $date = $row['date'];
+            ?>
+    <div class="folder">
+        <a href="../../uploads/<?php echo $user_id; ?>/<?php echo $real_name; ?>">
+            <div class="img-folder">
+                <img src="../../img/file.webp" alt="file.webp" class="folder-img">
+            </div>
+            <div class="description">
+                <?php echo $name; ?>
+            </div>
+        </a>
+    </div>
+    <?php } ?>
+</div>
+<?php } else {
+    ?>
+<div class="title">
+    <span class="title-panel">Archivos de <?php echo $user_details['name']?> <?php echo $user_details['1surname']?>
+        <?php echo $user_details['2surname']?></span>
+</div>
+<?php
+    echo "<h6 class='ext-danger text-center'> Este usuario no tiene asignado ningun archivo... </h6>";
+}
+}
 ?>

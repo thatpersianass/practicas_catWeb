@@ -2,7 +2,7 @@
 session_start();
     include("../../include/connection.php");
     include("../../include/functions.php");
-    include("../popups/add_folder.php");
+    include("../popups/upload_file.php");
 
     $user_selected = $_SESSION['user_selected'];
 
@@ -68,15 +68,15 @@ session_start();
 
         <main class="content">
             <div class="files-box">
-                <?php fetch_folders($user_details,$con) ?>
+                <?php fetch_files($user_details,$con) ?>
             </div>
 
             <div class="add-folder">
                 <a href="#" class="button-primary" data-bs-toggle="modal" data-bs-target="#insertdata">
                     <span class="icon">
-                        <i class="bi bi-folder-plus"></i>
+                        <i class="bi bi-file-earmark-plus"></i>
                     </span>
-                    <span class="description">Crear Carpeta</span>
+                    <span class="description">Añadir archivo</span>
                 </a>
             </div>
         </main>
