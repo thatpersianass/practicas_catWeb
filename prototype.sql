@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2025 a las 16:48:15
+-- Tiempo de generación: 15-05-2025 a las 13:02:09
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,12 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `files` (
   `id` int(11) NOT NULL,
+  `real_name` varchar(200) NOT NULL,
   `name` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL,
   `user_id` int(11) NOT NULL,
   `size` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `folder_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `files`
+--
+
+INSERT INTO `files` (`id`, `real_name`, `name`, `type`, `user_id`, `size`, `date`, `folder_id`) VALUES
+(1, '6825c5ce4c8618.63552584.pdf', 'FacturaMembrete.pdf', 'pdf', 5796, 129150, '2025-05-15 10:45:34', 1),
+(2, '6825c8d0464d33.73431653.pdf', 'piriquitingui.pdf', 'pdf', 6448, 3523605, '2025-05-15 10:59:43', 3);
 
 -- --------------------------------------------------------
 
@@ -45,9 +55,20 @@ CREATE TABLE `files` (
 CREATE TABLE `folders` (
   `id` int(11) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `files` bigint(20) NOT NULL
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `folders`
+--
+
+INSERT INTO `folders` (`id`, `user_id`, `name`) VALUES
+(1, 5796, 'Documentos'),
+(2, 5796, 'Facturas'),
+(3, 6448, 'Documentos'),
+(4, 5796, 'Contratos'),
+(5, 5796, 'Nominas'),
+(6, 5796, 'Horarios');
 
 -- --------------------------------------------------------
 
@@ -72,12 +93,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `username`, `passwd`, `name`, `1surname`, `2surname`, `dni`, `admin`) VALUES
-(1, 7886, 'admin', 'admin', '', '', '', '', 1),
-(2, 2407, 'marcosJ', '3003', 'Marcos', 'Pérez', 'Gómez', '43857678J', 0),
-(3, 7007, 'pacopa', '3003', 'Paco', 'Palomares', 'Dominguez', '23657940V', 0),
-(4, 88926, 'gonzalo', '3003', 'Gonzalo', 'Jimenez', 'Alboran', '8761729M', 0),
-(5, 2561, 'robert', '3003', 'Roberto', 'Diaz', '', '8271670L', 1),
-(6, 3684, 'marcosG', '3003', 'Marcos', 'Gonzales', 'Jimenez', '43856751N', 0);
+(1, 1, 'admin', 'admin', NULL, NULL, NULL, NULL, 1),
+(3, 5796, 'marcosJ', '3003', 'Marcos Javier', 'Pérez', 'Gómez', '43857678J', 0),
+(4, 5307, 'carlos', '$2y$10$xVkfnv6elu5KFHaS6qMs1O/lhui/hnZedkRXI1jl9iN4.F2TmiMVC', 'Carlos', 'Gonzales', 'Alboran', '1235327', 0),
+(5, 6448, 'alexpd', '3003', 'Alexander', 'Pérez', 'Dominguez', '12345678A', 0),
+(6, 67845, 'victfd', '3003', 'Victor', 'Fernandez', 'Diaz', '87654321B', 0);
 
 --
 -- Índices para tablas volcadas
@@ -110,13 +130,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `folders`
 --
 ALTER TABLE `folders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
