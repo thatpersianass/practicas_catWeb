@@ -67,15 +67,48 @@ session_start();
                     Tus archivos
                 </div>
                 <div class="search-box">
-                    <input type="text" placeholder="Introduce el nombre del archivo...">
+                    <input type="text" id="live_search" autocomplete="off"
+                        placeholder="Introduce el nombre del archivo...">
                 </div>
-                <?php fetch_files($user_data,$user_data,$con) ?>
-            </div>
+                <div class="search_result" id="search_result">
+                    <?php fetch_files($user_data,$user_data,$con) ?>
+                </div>
 
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
-    </script>
+        </main>
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
+        </script>
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#live_search").keyup(function() {
+
+                var input = $(this).val();
+                // alert(input);
+                if (input != "") {
+                    $("#search_result").css("display", "flex")
+                    $.ajax({
+
+                        url: "../../include/search_files.php",
+                        method: "POST",
+                        data: {
+                            user_admin: <?php echo $user_data['admin']; ?>,
+                            input: input
+                        },
+
+                        success: function(data) {
+                            $("#search_result").html(data);
+                        }
+                    });
+                }
+            });
+        });
+        </script>
 </body>
 
 </html>

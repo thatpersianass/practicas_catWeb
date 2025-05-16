@@ -86,9 +86,10 @@ session_start();
             var input = $(this).val();
             // alert(input);
             if (input != "") {
+                $("#result-box").css("display", "flex")
                 $.ajax({
 
-                    url: "../../include/livesearch.php",
+                    url: "../../include/search_users.php",
                     method: "POST",
                     data: {
                         input: input
@@ -100,7 +101,7 @@ session_start();
                 });
             } else {
 
-                $("#search_result").css("display", "none")
+                $("#result-box").css("display", "none")
             }
         });
     });

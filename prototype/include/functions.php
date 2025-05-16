@@ -138,7 +138,7 @@ function fetch_files($user_data,$user_details,$con){
                         </div>
                         <?php if($user_data['admin']){ ?>
                         <div class="delete-file">
-                            <a href="../../include/updates/update_file_delete.php?file_id=<?php echo urlencode($id); ?>"
+                            <a href="../../include/updates/update_file_delete.php?file_id=<?php echo $id; ?>?>"
                                 class="button-delete">
                                 <span class="icon">
                                     <i class="bi bi-trash"></i>

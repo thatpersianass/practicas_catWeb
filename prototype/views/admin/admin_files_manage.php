@@ -82,8 +82,9 @@ session_start();
                         <?php echo $user_details['1surname']?>
                         <?php echo $user_details['2surname']?></span>
                 </div>
+
                 <div class="search-box">
-                    <input type="text" placeholder="Introduce el nombre del archivo...">
+                    <input type="text" id="live_search" autocomplete="off" class="form-control" placeholder="Introduce el nombre del archivo..." >
                     <div class="add-file">
                         <a href="#" class="button-primary" data-bs-toggle="modal" data-bs-target="#insertdata">
                             <span class="icon">
@@ -93,12 +94,48 @@ session_start();
                         </a>
                     </div>
                 </div>
-                <?php fetch_files($user_data,$user_details,$con) ?>
+
+                <div class="search_result" id="search_result">
+                    <?php fetch_files($user_data,$user_details,$con) ?>
+                </div>
             </div>
         </main>
         </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
+        </script>
+        
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#live_search").keyup(function() {
+
+                var input = $(this).val();
+                // alert(input);
+                if (input != "") {
+                    $("#search_result").css("display", "flex")
+                    $.ajax({
+
+                        url: "../../include/search_files.php",
+                        method: "POST",
+                        data: {
+                            user_admin : <?php echo $user_data['admin']; ?>,
+                            input: input
+                        },
+
+                        success: function(data) {
+                            $("#search_result").html(data);
+                        }
+                    });
+                } else {
+
+                    $("#search_result").css("display", "none")
+                }
+            });
+        });
         </script>
 </body>
 
