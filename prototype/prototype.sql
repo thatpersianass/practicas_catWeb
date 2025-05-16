@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2025 a las 16:59:02
+-- Tiempo de generación: 16-05-2025 a las 13:32:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -37,17 +37,6 @@ CREATE TABLE `files` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `folder_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `files`
---
-
-INSERT INTO `files` (`id`, `real_name`, `name`, `type`, `user_id`, `size`, `date`, `folder_id`) VALUES
-(1, '6825e415c6a543.72671885.pdf', 'Factura 1.pdf', 'pdf', 95666, 3943, '2025-05-15 12:54:45', 1),
-(2, '6825fa467a5475.03473876.pdf', 'Factura 2.pdf', 'pdf', 95666, 30134, '2025-05-15 14:29:26', 1),
-(3, '6825fdc77731b2.10982496.pdf', 'Funciona??.pdf', 'pdf', 95666, 3398721, '2025-05-15 14:44:23', 1),
-(4, '6825fe1cebe0e9.35371948.pdf', 'Nomina-Marzo.pdf', 'pdf', 7813, 69652, '2025-05-15 14:45:48', 2),
-(5, '6825ff67887b37.89967321.jpg', 'Cliente.jpg', 'jpg', 95666, 25676, '2025-05-15 14:51:19', 1);
 
 -- --------------------------------------------------------
 
