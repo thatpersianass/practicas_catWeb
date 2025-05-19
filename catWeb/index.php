@@ -4,79 +4,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/7.css"> -->
+    <title>Panel Admin</title>
 </head>
 
 <body>
-    <div class="content">
-        <div class="form-box active" id="login-form">
-            <div class="title-content">
-                <h1>Inicio de Sesión</h1>
-            </div>
-            <div class="form-content">
-                <form method="POST">
+    <!-- Encabezado ========================================================== -->
+    <header>
+        <span class="header-title">PANEL DE ADMINISTRADOR</span>
+    </header>
 
-                    <div class="data-insertion">
-                        <label for="user">Usuario:</label>
-                        <input type="text" name="user" placeholder="  Inserte su usuario..." required>
+    <div class="main-container">
 
-                        <label for="password">Contraseña:</label>
-                        <input type="password" name="password" placeholder="  Inserte su contraseña..." required>
+        <!-- Sidebar ========================================================== -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <!-- Información del usuario ========================================================== -->
+                <div class="user-box">
+                    <nav class="user-info">
+                        <div class="user-pfp">
+                            <img src="img/usr_placeholder.webp">
+
+                        </div>
+                        <span class="username">Placeholder</span>
+                    </nav>
+
+                </div>
+
+                <a href="#" class="nav-link active">
+                    <div class="icon">
+                        <img src="icons/home.png" alt="home">
                     </div>
+                    <span class="description">Inicio</span>
+                </a>
 
-                    <div class="bottom-buttons">
-                        <input type="submit" value="Iniciar Sesión" class="button-primary">
-                        <button class="button-secondary" onclick="showForm('register-form')">Registrarse</button>
+                <a href="#" class="nav-link">
+                    <div class="icon">
+                        <img src="icons/zoom.png" alt="home">
                     </div>
+                    <span class="description">Buscar Usuarios</span>
+                </a>
+
+                <a href="#" class="nav-link">
+                    <div class="icon">
+                        <img src="icons/close.png" alt="home">
+                    </div>
+                    <span class="description">Cerrar Sesión</span>
+                </a>
             </div>
-            </form>
+
+        </aside>
+
+
+        <!-- Barra de navegación para móvil ========================================================== -->
+        <nav class="mobile-navbar">
+            <div class="user-info">
+                <span class="icon">
+                    <img src="img/usr_placeholder.webp" alt="usr">
+                </span>
+                <div class="username">
+                    <span class="innertext">Placeholder</span>
+                </div>
+            </div>
+        
+        <div class="sidebar-content">
+
+            <a href="#" class="nav-link active">
+                <div class="icon">
+                    <img src="icons/home.png" alt="home">
+                </div>
+                <span class="description">Inicio</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <div class="icon">
+                    <img src="icons/zoom.png" alt="home">
+                </div>
+                <span class="description">Buscar Usuarios</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <div class="icon">
+                    <img src="icons/close.png" alt="home">
+                </div>
+                <span class="description">Cerrar Sesión</span>
+            </a>
         </div>
+        </nav>
 
-        <div class="form-box" id="register-form">
-            <div class="title-content">
-                <h1>Registrarse</h1>
-            </div>
-            <div class="form-content">
-                <form method="POST">
-
-                    <div class="data-insertion">
-                        <label for="user">Nombre(s):</label>
-                        <input type="text" name="user" placeholder="  Inserte su(s) nombre(s)..." required>
-
-                        <label for="user">Primer apellido:</label>
-                        <input type="text" name="user" placeholder="  Inserte su primer apellido..." required>
-
-                        <label for="user">Segundo apellido:</label>
-                        <input type="text" name="user" placeholder="  Inserte su segundo apellido..." required>
-
-                        <label for="user">DNI:</label>
-                        <input type="text" name="user" placeholder="  Inserte su DNI..." required>
-
-                        <label for="user">Nombre de usuario:</label>
-                        <input type="text" name="user" placeholder="  Inserte su usuario..." required>
-
-                        <label for="password">Contraseña:</label>
-                        <input type="password" name="password" placeholder="  Inserte su contraseña..." required>
+        <!-- Contenido principal ========================================================== -->
+        <main class="content">
+            <div class="admin-dashboard">
+                <div class="user-count">
+                    <div class="topbar">
+                        <span class="innertext">Usuarios registrados</span>
+                    </div>
+                    <div class="count-content">
+                        <span class="icon">
+                            <img src="icons/users.png" alt="users-count">
+                        </span>
+                        <span class="inner-text">
+                            Hay <b class="special-text-1">X</b> usuarios registrados en el Servicio
+                        </span>
                     </div>
 
-                    <div class="bottom-buttons">
-                        <input type="submit" value="Registrarse" class="button-primary">
-                        <button class="button-secondary" onclick="showForm('login-form')">Iniciar sesión</button>
+                </div>
 
+                <div class="files-count">
+                    <div class="topbar">
+                        <span class="innertext">Archivos Subidos</span>
                     </div>
-                </form>
-            </div>
+                    <div class="count-content">
+                        <span class="icon">
+                            <img src="icons/diskette.png" alt="users-count">
+                        </span>
+                        <span class="inner-text">
+                            Hay <b class="special-text-1">X</b> archivos subidos a la nube
+                        </span>
+                    </div>
+                </div>
+                <div class="last-user">
+                    <div class="topbar">
+                        <span class="innertext">Ultimo usuario</span>
+                    </div>
+                    <div class="count-content">
+                        <span class="icon">
+                            <img src="icons/user.png" alt="users-count">
+                        </span>
+                        <span class="inner-text">
+                            <b class="special-text-1">X</b> se ha conectado el <b class="special-text-1">XX-XX-XXXX</b>
+                        </span>
+                    </div>
+                </div>
+        </main>
 
-        </div>
 
-        <script type="text/javascript">
-        function showForm(formId) {
-            document.querySelectorAll(".form-box").forEach(form => form.classList.remove("active"));
-            document.getElementById(formId).classList.add("active");
-        }
-        </script>
+    </div>
+
+
+
 </body>
 
 </html>
