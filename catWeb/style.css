@@ -214,22 +214,21 @@ header {
     background: rgba(203, 210, 250, 0.5);
     border: 1px solid rgba(70, 70, 70, 0.18);
     color: black;
-    text-shadow: 4px 4px 20px rgba(0,0,0,0.9);
 }
 
 .mobile-navbar .user-info {
     margin: 8px;
     padding: 5px 25px 5px 25px;
     display: flex;
+    flex-direction: column;
     gap: 10px;
     align-items: center;
     font-weight: 600;
 
-    background: rgba(203, 210, 250, 0.5);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(70, 70, 70, 0.18);
     color: black;
     border-radius: 10px;
-    text-shadow: 4px 4px 20px rgba(0,0,0,0.9);
 }
 
 /* Disposición adaptativa ========================================================== */
@@ -271,7 +270,7 @@ header {
         flex-direction: column;
         align-items: center;
 
-        background: rgba(203, 210, 250, 0.5);
+        background: rgba(255, 255, 255, 0.2);
         border: 1px solid rgba(70, 70, 70, 0.18);
         color: black;
         border-radius: 10px;
