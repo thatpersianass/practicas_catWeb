@@ -93,3 +93,18 @@
 .button-add:focus {
     color: white;
 }
+
+.error-message {
+    color: rgb(102, 4, 4);
+    padding: 5px;
+    background: rgba(255, 83, 83, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(135, 31, 31, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba(122, 0, 0, 0.18);
+}
+
+.big-font {
+    font-size: 16px;
+}

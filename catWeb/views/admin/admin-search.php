@@ -11,6 +11,8 @@
         header("Location: ../user/user-folders.php");
         exit();
     }
+
+    $username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +44,7 @@
                             <img src="../../img/pfp/admin.webp">
 
                         </div>
-                        <span class="username">Placeholder</span>
+                        <span class="username"><?= $username?></span>
                     </nav>
 
                 </div>
@@ -93,7 +95,7 @@
                     <img src="../../img/pfp/admin.webp" alt="usr">
                 </span>
                 <div class="username">
-                    <span class="innertext">Placeholder</span>
+                    <span class="innertext"><?= $username?></span>
                 </div>
             </div>
 
@@ -134,46 +136,7 @@
                     <button class="button-add">Añadir usuario</button>
                 </div>
 
-                <div class="user-display-box">
-                    <table>
-                        <tr>
-                            <td class="user-show">
-                                <span class="pfp">
-                                    <img src="../../img/pfp/aqua.webp" alt="usr">
-                                </span>
-                                <div class="user-info">
-                                    <span class="user-name">Marcos Javier Pérez Gómez</span>
-                                    <span class="user-others">43857678J - 23/02/2021</span>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="admin-folders.php" class="button-primary">Detalles</a>
-                                    <a href="#" class="button-delete">Eliminar</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="user-show">
-                                <span class="pfp">
-                                    <img src="../../img/pfp/yellow.webp" alt="usr">
-                                </span>
-                                <div class="user-info">
-                                    <span class="user-name">Marcos Javier Pérez Gómez</span>
-                                    <span class="user-others">43857678J - 23/02/2021</span>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="admin-folders.php" class="button-primary">Detalles</a>
-                                    <a href="#" class="button-delete">Eliminar</a>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </table>
+                <div class="user-display-box" id="user-display-box">
                 </div>
             </div>
         </main>
@@ -184,5 +147,34 @@
 
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $("#search-usr").keyup(function() {
+
+        var input = $(this).val();
+        if (input != "") {
+            $("#user-display-box").css("display", "flex")
+            $.ajax({
+
+                url: "../../functions/user_search.php",
+                method: "POST",
+                data: {
+                    input: input
+                },
+
+                success: function(data) {
+                    $("#user-display-box").html(data);
+                }
+            });
+        } else {
+
+            $("#user-display-box").css("display", "none")
+        }
+    });
+});
+</script>
 
 </html>

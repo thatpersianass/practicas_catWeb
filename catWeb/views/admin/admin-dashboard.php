@@ -79,7 +79,7 @@
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="views/admin/admin-search.php" class="nav-link">
+                <a href="admin-search.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/zoom.png" alt="home">
                     </div>
