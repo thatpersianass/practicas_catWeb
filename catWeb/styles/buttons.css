@@ -1,0 +1,95 @@
+/* Botón Primario */
+.button-primary {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    background: linear-gradient( to bottom, #518ee9 0%, #1a3c68 50%, #0d2c3a 51%, #0f2d3f 70%, #1a5661 100% );
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    transition-duration: 0.2s;
+    border: solid #02505e 1.8px;
+}
+
+.button-primary:hover {
+    filter: brightness(120%);
+    transition-duration: 0.2s;
+}
+
+.button-primary:focus {
+    color: white;
+}
+
+/* Botón Secundario */
+.button-secondary {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    background: linear-gradient( to bottom, #aab9be 0%, #6a7777 50%, #384249 51%, #333c41 70%, #697983 100% );
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    transition-duration: 0.2s;
+    border: solid #60878d 1.8px;
+}
+
+.button-secondary:hover {
+    filter: brightness(110%);
+    transition-duration: 0.2s;
+}
+
+.button-secondary:focus {
+    color: white;
+}
+
+/* Botón de eliminacion / cerrar */
+.button-delete {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    background: linear-gradient( to bottom, #e9517f 0%, #681a2b 50%, #3a0d11 51%, #3f0f15 70%, #81222f 100% );
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    transition-duration: 0.2s;
+    border: solid #cf5e8d 1.8px;
+}
+
+.button-delete:hover {
+    filter: brightness(120%);
+    transition-duration: 0.2s;
+}
+
+.button-delete:focus {
+    color: white;
+}
+
+/* Botón Añadir */
+.button-add {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    background: linear-gradient( to bottom, #51e977 0%, #1a682b 50%, #0d3a11 51%, #0f3f19 70%, #1a6135 100% );
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    transition-duration: 0.2s;
+    border: solid #268b37 1.8px;
+}
+
+.button-add:hover {
+    filter: brightness(120%);
+    transition-duration: 0.2s;
+}
+
+.button-add:focus {
+    color: white;
+}
