@@ -1,3 +1,18 @@
+<?php
+    session_start();
+    include('../../functions/config.php');
+
+    if (!isset($_SESSION['username'])) {
+        header("Location: ../../index.php");
+        exit();
+    }
+
+    if (!$_SESSION['is_admin']){
+        header("Location: ../user/user-folders.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

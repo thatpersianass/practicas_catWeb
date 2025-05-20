@@ -11,6 +11,32 @@
         header("Location: ../user/user-folders.php");
         exit();
     }
+
+    $username = $_SESSION['username'];
+
+    $users_registered = 0;
+    $result = $con->query("SELECT COUNT(*) AS total FROM users");
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $users_registered = (int)$row['total'];
+    }
+
+    $files_count = 0;
+    $result = $con->query("SELECT COUNT(*) AS total FROM files");
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $files_count = (int)$row['total'];
+    }
+
+    $latest_user = null;
+    $result = $con->query("SELECT username, created FROM users ORDER BY created DESC LIMIT 1");
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $latest_user = $row['username'];
+        $date = $row['created'];
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +46,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/main.css">
-    <link rel="stylesheet" href="../../styles/buttons.css">
     <title>Panel Admin</title>
 </head>
 
@@ -42,26 +67,26 @@
                             <img src="../../img/pfp/admin.webp">
 
                         </div>
-                        <span class="username">Placeholder</span>
+                        <span class="../../username"><?= $username?></span>
                     </nav>
 
                 </div>
 
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link active">
                     <div class="icon">
                         <img src="../../icons/home.png" alt="home">
                     </div>
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="views/admin/admin-search.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/zoom.png" alt="home">
                     </div>
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="#" class="nav-link active">
+                <a href="#" class="nav-link disabled">
                     <div class="icon">
                         <img src="../../icons/file.png" alt="home">
                     </div>
@@ -75,7 +100,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -93,27 +118,27 @@
                     <img src="../../img/pfp/admin.webp" alt="usr">
                 </span>
                 <div class="username">
-                    <span class="innertext">Placeholder</span>
+                    <span class="innertext"><?= $username?></span>
                 </div>
             </div>
 
             <div class="sidebar-content">
 
-                <a href="../index.php" class="nav-link">
+                <a href="#" class="nav-link active">
                     <div class="icon">
                         <img src="../../icons/home.png" alt="home">
                     </div>
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="admin-search.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/zoom.png" alt="home">
                     </div>
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -124,52 +149,48 @@
 
         <!-- Contenido principal ========================================================== -->
         <main class="content">
-            <div class="admin-dashboard">
-                <div class="title">
-                    <span class="inner-text">Carpetas de Placeholder</span>
-                </div>
-
-                <div class="folder-box">
-
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/file.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    Documentos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="admin-files.php" class="button-primary">Ver</a>
-                            <a href="#" class="button-delete">Borrar</a>
-                        </div>
+            <div class="admin-dashboard" style="background: none; border: none;">
+                <div class="user-count">
+                    <div class="topbar">
+                        <span class="innertext">Usuarios registrados</span>
                     </div>
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/file.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    Documentos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="admin-files.php" class="button-primary">Ver</a>
-                            <a href="#" class="button-delete">Borrar</a>
-                        </div>
+                    <div class="count-content">
+                        <span class="icon">
+                            <img src="../../icons/users.png" alt="users-count">
+                        </span>
+                        <span class="inner-text">
+                            Hay <b class="special-text-1"><?= $users_registered ?></b> usuarios registrados en el Servicio
+                        </span>
                     </div>
 
                 </div>
 
-            </div>
-            <div class="add-button">
-                <a href="#" class="button-add">Crear Carpeta</a>
-            </div>
+                <div class="files-count">
+                    <div class="topbar">
+                        <span class="innertext">Archivos Subidos</span>
+                    </div>
+                    <div class="count-content">
+                        <span class="icon">
+                            <img src="../../icons/diskette.png" alt="users-count">
+                        </span>
+                        <span class="inner-text">
+                            Se han subido <b class="special-text-1"><?= $files_count ?></b> archivos a la nube
+                        </span>
+                    </div>
+                </div>
+                <div class="last-user">
+                    <div class="topbar">
+                        <span class="innertext">Ultimo usuario</span>
+                    </div>
+                    <div class="count-content">
+                        <span class="icon">
+                            <img src="../../icons/user.png" alt="users-count">
+                        </span>
+                        <span class="inner-text">
+                            <b class="special-text-1"><?= $latest_user ?></b> se ha registrado el <b class="special-text-1"><?= $date ?></b>
+                        </span>
+                    </div>
+                </div>
         </main>
 
 

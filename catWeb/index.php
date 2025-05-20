@@ -1,162 +1,114 @@
+<?php
+    session_start();
+
+    $errors = [
+        'login' => $_SESSION['login_error'] ?? '',
+        'register' => $_SESSION['register_error'] ?? ''
+    ];
+
+$activeForm = $_SESSION['active_form'] ?? 'login';
+
+session_unset();
+
+function showError($error) {
+    return !empty($error) ? "<div class='error-message'>$error</div>" : '';
+}
+
+function isActiveForm($formName, $activeForm) { 
+    return $formName === $activeForm ? 'active' : '';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css">
-    <title>Panel Admin</title>
+    <title></title>
+    <link rel="stylesheet" href="styles/login-register.css">
+    <link rel="stylesheet" href="styles/buttons.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/7.css"> -->
 </head>
 
 <body>
-    <!-- Encabezado ========================================================== -->
-    <header>
-        <span class="header-title">PANEL DE ADMINISTRADOR</span>
-    </header>
+    <div class="content">
+        <div class="form-box <?= isActiveForm('login',$activeForm); ?>" id="login-form">
+            <div class="profile-photo">
+                <img src="icons/user.png" alt="user-pfp" class="usr-photo">
+            </div>
+            <div class="title-content">
+                <h1>Inicio de Sesión</h1>
+                <?= showError($errors['login']); ?>
+            </div>
+            <div class="form-content">
+                <form action="functions/login_register.php" method="POST">
 
-    <div class="main-container">
+                    <div class="data-insertion">
+                        <label for="user">Usuario:</label>
+                        <input type="text" name="user" placeholder="  Inserte su usuario..." required>
 
-        <!-- Sidebar ========================================================== -->
-        <aside class="sidebar">
-            <div class="sidebar-content">
-                <!-- Información del usuario ========================================================== -->
-                <div class="user-box">
-                    <nav class="user-info">
-                        <div class="user-pfp">
-                            <img src="img/pfp/admin.webp">
-
-                        </div>
-                        <span class="username">Placeholder</span>
-                    </nav>
-
-                </div>
-
-                <a href="#" class="nav-link active">
-                    <div class="icon">
-                        <img src="icons/home.png" alt="home">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" name="password" placeholder="  Inserte su contraseña..." required>
                     </div>
-                    <span class="description">Inicio</span>
-                </a>
 
-                <a href="views/admin/admin-search.php" class="nav-link">
-                    <div class="icon">
-                        <img src="icons/zoom.png" alt="home">
+                    <div class="bottom-buttons">
+                        <input type="submit" name="login" value="Iniciar Sesión" class="button-primary">
+                        <button class="button-secondary" onclick="showForm('register-form')">Registrarse</button>
                     </div>
-                    <span class="description">Buscar Usuarios</span>
-                </a>
+            </div>
+            </form>
+        </div>
 
-                <a href="#" class="nav-link disabled">
-                    <div class="icon">
-                        <img src="icons/file.png" alt="home">
-                    </div>
-                    <span class="description">Carpetas</span>
-                </a>
+        <div class="form-box <?= isActiveForm('register',$activeForm); ?>" id="register-form">
+            <div class="profile-photo">
+                <img src="icons/user.png" alt="user-pfp" class="usr-photo">
+            </div>
+            <div class="title-content">
+                <h1>Registrarse</h1>
+                <?= showError($errors['register']); ?>
+            </div>
+            <div class="form-content">
+                <form action="functions/login_register.php" method="POST">
 
-                <a href="#" class="nav-link disabled">
-                    <div class="icon">
-                        <img src="icons/document.png" alt="home">
-                    </div>
-                    <span class="description">Archivos</span>
-                </a>
+                    <div class="data-insertion">
+                        <label for="name">Nombre(s):</label>
+                        <input type="text" name="name" placeholder="  Inserte su(s) nombre(s)...">
 
-                <a href="#" class="nav-link">
-                    <div class="icon">
-                        <img src="icons/close.png" alt="home">
+                        <label for="surname1">Primer apellido:</label>
+                        <input type="text" name="surname1" placeholder="  Inserte su primer apellido...">
+
+                        <label for="surname2">Segundo apellido:</label>
+                        <input type="text" name="surname2" placeholder="  Inserte su segundo apellido...">
+
+                        <label for="dni">DNI:</label>
+                        <input type="text" name="dni" placeholder="  Inserte su DNI...">
+
+                        <label for="username">Nombre de usuario:</label>
+                        <input type="text" name="username" placeholder="  Inserte su usuario...">
+
+                        <label for="password">Contraseña:</label>
+                        <input type="password" name="password" placeholder="  Inserte su contraseña...">
                     </div>
-                    <span class="description">Cerrar Sesión</span>
-                </a>
+
+                    <div class="bottom-buttons">
+                        <input type="submit" name="register" value="Registrarse" class="button-primary">
+                        <button class="button-secondary" onclick="showForm('login-form')">Iniciar sesión</button>
+
+                    </div>
+                </form>
             </div>
 
-        </aside>
-
-
-        <!-- Barra de navegación para móvil ========================================================== -->
-        <nav class="mobile-navbar">
-            <div class="user-info">
-                <span class="icon">
-                    <img src="img/pfp/admin.webp" alt="usr">
-                </span>
-                <div class="username">
-                    <span class="innertext">Placeholder</span>
-                </div>
-            </div>
-
-            <div class="sidebar-content">
-
-                <a href="#" class="nav-link active">
-                    <div class="icon">
-                        <img src="icons/home.png" alt="home">
-                    </div>
-                    <span class="description">Inicio</span>
-                </a>
-
-                <a href="views/admin/admin-search.php" class="nav-link">
-                    <div class="icon">
-                        <img src="icons/zoom.png" alt="home">
-                    </div>
-                    <span class="description">Buscar Usuarios</span>
-                </a>
-
-                <a href="#" class="nav-link">
-                    <div class="icon">
-                        <img src="icons/close.png" alt="home">
-                    </div>
-                    <span class="description">Cerrar Sesión</span>
-                </a>
-            </div>
-        </nav>
-
-        <!-- Contenido principal ========================================================== -->
-        <main class="content">
-            <div class="admin-dashboard" style="background: none; border: none;">
-                <div class="user-count">
-                    <div class="topbar">
-                        <span class="innertext">Usuarios registrados</span>
-                    </div>
-                    <div class="count-content">
-                        <span class="icon">
-                            <img src="icons/users.png" alt="users-count">
-                        </span>
-                        <span class="inner-text">
-                            Hay <b class="special-text-1">X</b> usuarios registrados en el Servicio
-                        </span>
-                    </div>
-
-                </div>
-
-                <div class="files-count">
-                    <div class="topbar">
-                        <span class="innertext">Archivos Subidos</span>
-                    </div>
-                    <div class="count-content">
-                        <span class="icon">
-                            <img src="icons/diskette.png" alt="users-count">
-                        </span>
-                        <span class="inner-text">
-                            Hay <b class="special-text-1">X</b> archivos subidos a la nube
-                        </span>
-                    </div>
-                </div>
-                <div class="last-user">
-                    <div class="topbar">
-                        <span class="innertext">Ultimo usuario</span>
-                    </div>
-                    <div class="count-content">
-                        <span class="icon">
-                            <img src="icons/user.png" alt="users-count">
-                        </span>
-                        <span class="inner-text">
-                            <b class="special-text-1">X</b> se ha registrado el <b class="special-text-1">XX-XX-XXXX</b>
-                        </span>
-                    </div>
-                </div>
-        </main>
-
-
+        </div>
     </div>
 
-
-
+    <script type="text/javascript">
+    function showForm(formId) {
+        document.querySelectorAll(".form-box").forEach(form => form.classList.remove("active"));
+        document.getElementById(formId).classList.add("active");
+    }
+    </script>
 </body>
 
 </html>

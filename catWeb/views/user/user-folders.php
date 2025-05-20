@@ -1,3 +1,16 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['username'])) {
+        header("Location: ../../index.php");
+        exit();
+    }
+
+    $username = $_SESSION['username'];
+    $color = $_SESSION['color'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,10 +37,10 @@
                 <div class="user-box">
                     <nav class="user-info">
                         <div class="user-pfp">
-                            <img src="../../img/pfp/blue.webp">
+                            <img src="../../img/pfp/<?=$color?>.webp">
 
                         </div>
-                        <span class="username">Placeholder</span>
+                        <span class="username"><?= $username ?></span>
                     </nav>
 
                 </div>
@@ -46,7 +59,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -61,10 +74,10 @@
         <nav class="mobile-navbar">
             <div class="user-info">
                 <span class="icon">
-                    <img src="../../img/pfp/blue.webp" alt="usr">
+                    <img src="../../img/pfp/<?=$color?>.webp" alt="usr">
                 </span>
                 <div class="username">
-                    <span class="innertext">Placeholder</span>
+                    <span class="innertext"><?= $username ?></span>
                 </div>
             </div>
 
@@ -77,7 +90,7 @@
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -108,7 +121,6 @@
                         </div>
                         <div class="actions">
                             <a href="user-files.php" class="button-primary">Ver</a>
-                            <a href="#" class="button-delete">Borrar</a>
                         </div>
                     </div>
                     <div class="folder-element">
@@ -124,7 +136,6 @@
                         </div>
                         <div class="actions">
                             <a href="user-files.php" class="button-primary">Ver</a>
-                            <a href="#" class="button-delete">Borrar</a>
                         </div>
                     </div>
 
