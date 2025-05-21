@@ -1,6 +1,18 @@
 <?php
     session_start();
     include('../../functions/config.php');
+    include('../../functions/get_details.php');
+    include('../../functions/get_files_folders.php');
+
+    $username = $_SESSION['username'];
+
+    $user_selected = $_SESSION['user_selected'];
+
+    $folder_selected = $_SESSION['folder_selected'];
+
+    $user_details = get_user_details($user_selected,$con);
+
+    $folder_details = get_folder_details($folder_selected,$con);
 
     if (!isset($_SESSION['username'])) {
         header("Location: ../../index.php");
@@ -11,6 +23,56 @@
         header("Location: ../user/user-folders.php");
         exit();
     }
+
+    $user_selected = $_SESSION['user_selected'];
+
+    $user_details = get_user_details($user_selected,$con);
+
+if(isset($_POST['upload'])) {
+    $file = $_FILES['input-file'];
+    $fileName = $_FILES['input-file']['name'];
+    $fileTmpName = $_FILES['input-file']['tmp_name'];
+    $fileSize = $_FILES['input-file']['size'];
+    $fileError = $_FILES['input-file']['error'];
+    $fileType = $_FILES['input-file']['type'];
+    $user_id = $user_details['user_id'];
+    $folder_id = $_SESSION['folder_selected'];
+
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+
+    $name = $_POST['name'] . '.' . $fileActualExt;
+
+    $allowed = array('jpg','jpeg','pdf','png');
+
+    if(in_array($fileActualExt, $allowed)){
+        if($fileError === 0){
+            if($fileSize < 10000000000000){
+
+                $uploadDir = '../../uploads/' . $user_details['id'] . '/';
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = $uploadDir.$fileNameNew;
+
+                move_uploaded_file($fileTmpName, $fileDestination);
+
+                $query ="insert into files (real_name,name,type,user_id,size,folder_id) values('$fileNameNew','$name','$fileActualExt','$user_id','$fileSize','$folder_id')";
+                mysqli_query($con, $query);
+
+                header("Location: admin-files.php?uploadsuccesfull");
+            } else {
+                echo "The file is too big!";
+            }
+
+        } else {
+            echo "There was an error uploading your file!";
+        }
+    } else {
+        echo "You cannot upload files of this type!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +104,7 @@
                             <img src="../../img/pfp/admin.webp">
 
                         </div>
-                        <span class="username">Placeholder</span>
+                        <span class="username"><?=$username?></span>
                     </nav>
 
                 </div>
@@ -93,7 +155,7 @@
                     <img src="../../img/pfp/admin.webp" alt="usr">
                 </span>
                 <div class="username">
-                    <span class="innertext">Placeholder</span>
+                    <span class="innertext"><?=$username?></span>
                 </div>
             </div>
 
@@ -126,50 +188,18 @@
         <main class="content">
             <div class="admin-dashboard">
                 <div class="title">
-                    <span class="inner-text">Archivos de placeholder - --carpeta-- </span>
+                    <span class="inner-text">Archivos de <?= $user_details['name'] ?> - <?= $folder_details['name'] ?>
+                    </span>
                 </div>
                 <div class="search-box">
                     <input type="text" name="search-usr" id="search-usr" class="search-bar"
                         placeholder="  Introduce el nombre del archivo...">
-                    <button class="button-add">Subir archivo</button>
+                    <button class="button-add" id="upload-file">Subir archivo</button>
                 </div>
 
                 <div class="folder-box">
 
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/document.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    Factura.pdf
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="#" class="button-primary">Ver</a>
-                            <a href="" class="button-secondary">Descargar</a>
-                            <a href="#" class="button-delete">Borrar</a>
-                        </div>
-                    </div>
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/png.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    meme.png
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="#" class="button-primary">Ver</a>
-                            <a href="" class="button-secondary">Descargar</a>
-                            <a href="#" class="button-delete">Borrar</a>
-                        </div>
-                    </div>
+                    <?php get_files($folder_details['id'],$con) ?>
 
                 </div>
 
@@ -179,8 +209,38 @@
 
     </div>
 
+    <div class="modal-container" id="modal-upload-file">
+        <div class="modal">
+            <span class="title">
+                <h1>Subir Archivo a <?=$folder_details['name']?></h1>
+            </span>
+            <div class="modal-content">
+                <form method="post" enctype="multipart/form-data">
+                    <label for="name">Nombre del archivo:</label>
+                    <input type="text" class="form-control" name="name" placeholder="Introduce el nombre del archivo..."
+                        required>
+                    <div class="drop-file">
+                        <label for="input-file" id="drop-area">
+                            <input type="file" name="input-file" id="input-file" hidden>
+                            <div class="drag-drop">
+                                <img src="../../icons/up.png">
+                                <p>Arrastra y suelta aqui un archivo <br>para subirlo</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <input type="submit" name="upload" value="Subir Archivo" class="button-primary">
+                        <button type="button" class="button-secondary" id="close">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
 
 
 </body>
+<script type="text/javascript" src="../../scripts/drag-file.js"></script>
+<script type="text/javascript" src="../../scripts/file-modal.js"></script>
 
 </html>

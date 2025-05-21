@@ -34,7 +34,7 @@
             </td>
             <td>
                 <div class="actions">
-                    <a href="../../functions/update_folder_details.php?user=<?php echo urlencode($username); ?>" class="button-primary">Detalles</a>
+                    <a href="../../functions/update_user_details.php?user=<?php echo urlencode($username); ?>" class="button-primary">Detalles</a>
                     <a href="#" class="button-delete">Eliminar</a>
                 </div>
             </td>

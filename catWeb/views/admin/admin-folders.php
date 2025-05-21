@@ -19,6 +19,20 @@
     $user_selected = $_SESSION['user_selected'];
 
     $user_details = get_user_details($user_selected,$con);
+
+    if(isset($_POST['add-folder']))
+{
+        //something was posted
+        $name = $_POST['name'];
+        $user_id = $user_details['id'];
+
+        //guardar en la base de datos
+        $query ="insert into folders (user_id,name) values('$user_id','$name')";
+        mysqli_query($con, $query);
+        
+        header("Location: admin-folders.php");
+        die;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +76,7 @@
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="admin-search.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/zoom.png" alt="home">
                     </div>
@@ -114,7 +128,7 @@
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="admin-search.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/zoom.png" alt="home">
                     </div>
@@ -134,7 +148,8 @@
         <main class="content">
             <div class="admin-dashboard">
                 <div class="title">
-                    <span class="inner-text">Carpetas de <?=$user_details['name']?> <?=$user_details['1surname']?> <?=$user_details['2surname']?></span>
+                    <span class="inner-text">Carpetas de <?=$user_details['name']?> <?=$user_details['1surname']?>
+                        <?=$user_details['2surname']?></span>
                 </div>
 
                 <div class="folder-box">
@@ -143,15 +158,34 @@
 
             </div>
             <div class="add-button">
-                <a href="#" class="button-add">Crear Carpeta</a>
+                <a href="#" class="button-add" id="add-folder">Crear Carpeta</a>
             </div>
         </main>
 
-
+        <!-- Popup Crear Carpeta -->
+        <div class="modal-container" id="modal-add-folder">
+            <div class="modal">
+                <span class="title">
+                    <h1>Crear Carpeta para <?=$user_selected?></h1>
+                </span>
+                <div class="modal-content">
+                    <form action="#" method="post">
+                        <div class="data-insertion">
+                            <label for="name">Nombre de la carpeta:</label>
+                            <input type="text" name="name" placeholder="  Inserte el nombre de la carpeta...">
+                        </div>
+                        <div class="buttons">
+                            <input type="submit" name="add-folder" value="Crear carpeta" class="button-primary">
+                            <button type="button" class="button-secondary" id="close">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-
+    <script type="text/javascript" src="../../scripts/folder-modal.js"></script>
 </body>
 
 </html>

@@ -10,14 +10,14 @@ function get_user_details($username,$con) {
         }
 }
 
-function get_file_details($file_id,$con){
-    $query = "SELECT * FROM files WHERE id = '$file_id' limit 1";
+function get_folder_details($folder_id,$con){
+    $query = "SELECT * FROM folders WHERE id = '$folder_id' limit 1";
     $result = mysqli_query($con, $query);
 
     if($result && mysqli_num_rows($result) > 0)
         {
-            $user_data = mysqli_fetch_assoc($result);
-            return $file_data; 
+            $folder_data = mysqli_fetch_assoc($result);
+            return $folder_data; 
         }
 }
 ?>

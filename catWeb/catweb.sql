@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2025 a las 17:02:05
+-- Tiempo de generación: 21-05-2025 a las 13:59:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,6 +38,15 @@ CREATE TABLE `files` (
   `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `files`
+--
+
+INSERT INTO `files` (`id`, `user_id`, `folder_id`, `name`, `real_name`, `size`, `type`, `created`) VALUES
+(3, 0, 1, 'Factura no tan sencilla.pdf', '682dbc5a4804d3.02566456.pdf', 100717, 'pdf', '2025-05-21 11:49:37'),
+(4, 0, 1, 'FacturaSencilla.pdf', '682dbd974b9065.06891422.pdf', 100717, 'pdf', '2025-05-21 11:48:39'),
+(5, 0, 4, 'Imagen Horizontal.jpg', '682dbe56222f08.98976373.jpg', 181519, 'jpg', '2025-05-21 11:51:50');
+
 -- --------------------------------------------------------
 
 --
@@ -56,7 +65,9 @@ CREATE TABLE `folders` (
 
 INSERT INTO `folders` (`id`, `user_id`, `name`) VALUES
 (1, 6, 'Facturas'),
-(2, 6, 'Imagenes');
+(2, 6, 'Imagenes'),
+(3, 6, 'Videos'),
+(4, 14, 'Documentos');
 
 -- --------------------------------------------------------
 
@@ -91,7 +102,8 @@ INSERT INTO `users` (`id`, `username`, `passwd`, `name`, `1surname`, `2surname`,
 (11, 'pablogr', '$2y$10$xX8Ia2C5G.pBt2gFVWgX6u4AhL0JYkNI6.bL654rsy6BWh/qKPsZq', 'Pablo', 'Gomez', 'Ruiz', '16382749Z', 'yellow', '2025-05-20 14:26:17', 0),
 (12, 'yelitzavr', '$2y$10$LbUJjXpyw6x2ZEveZxdHfO1OcPgJlSBZODNia3V9SRPmlhKtxFnPi', 'Yelitza', 'del Valle', 'Rojas', '28419375K', 'purple', '2025-05-20 14:27:47', 0),
 (13, 'ronnyar', '$2y$10$ODuQnYlIyo3Q2vYobsmQru580ljg2xUANVOJoafP2U5B7wGV6oH8.', 'Ronny', 'Alejandro', 'Rojas', '50298371D', 'blue', '2025-05-20 14:28:13', 0),
-(14, 'orianadb', '$2y$10$nvJovRb5wCeX5.vv6iV8wOgL0jIenvs9T2U0ud4c5we593Ph54qV.', 'Oriana', 'Daniela', 'Briceño', '18305294Z', 'orange', '2025-05-20 14:28:38', 0);
+(14, 'orianadb', '$2y$10$nvJovRb5wCeX5.vv6iV8wOgL0jIenvs9T2U0ud4c5we593Ph54qV.', 'Oriana', 'Daniela', 'Briceño', '18305294Z', 'orange', '2025-05-20 14:28:38', 0),
+(15, 'jpablo', '$2y$10$Wqf0KLM8NTzHGXWZ3nLw3ePeBNuWC7tEPCBKc7fQUzB2LYDRq0WAa', 'Juan Pablo', 'Alborán', '', '12345678A', 'orange', '2025-05-21 09:32:16', 0);
 
 --
 -- Índices para tablas volcadas
@@ -126,19 +138,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `folders`
 --
 ALTER TABLE `folders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
