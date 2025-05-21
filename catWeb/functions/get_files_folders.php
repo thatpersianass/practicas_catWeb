@@ -1,5 +1,5 @@
 <?php
-    function get_folders($user_id,$con){
+    function get_folders($admin,$user_id,$con){
         $query = "SELECT * FROM folders WHERE user_id = '$user_id'";
 
         $result = mysqli_query($con,$query);
@@ -21,15 +21,17 @@
                 </div>
             </div>
             <div class="actions">
-                <a href="../../functions/update_folder_details.php?folder=<?php echo urlencode($id); ?>" class="button-primary">Ver</a>
+                <a href="../../functions/update_folder_details.php?folder=<?php echo urlencode($id); ?>" class="button-primary">Abrir</a>
+                <?php if($admin){?>
                 <a href="#" class="button-delete">Borrar</a>
+                <?php } ?>
             </div>
         </div>
         <?php }} else {
             echo "<h6 class='error-message big-font'> ESTE USUARIO NO TIENE CARPETAS ASOCIADAS </h6>";
         }}
 
-    function get_files($folder_id,$con){
+    function get_files($admin,$folder_id,$con){
         $query = "SELECT * FROM files WHERE folder_id = '$folder_id'";
 
         $result = mysqli_query($con,$query);
@@ -37,13 +39,13 @@
         if(mysqli_num_rows($result) > 0){
                 while($row = mysqli_fetch_assoc($result)){
                     $id = $row['id'];
-                    $user_id = $row['user_id'];
                     $folder_id = $row['folder_id'];
                     $name = $row['name'];
                     $real_name = $row['real_name'];
                     $size = $row['size'];
                     $type = $row['type'];
                     $created = $row['created'];
+                    $filePath = "../../uploads/{$real_name}";
             ?>
         <div class="folder-element">
             <div class="folder">
@@ -60,8 +62,11 @@
                 </div>
             </div>
             <div class="actions">
-                <a href="../../functions/update_folder_details.php?folder=<?php echo urlencode($id); ?>" class="button-primary">Ver</a>
+                <a href="#" class="button-primary" onclick="showFilePreview('<?=$filePath?>'); return false;">Ver</a>
+                <a href="<?=$filePath?>" download="<?=$name?>" class="button-secondary">Descargar</a>
+                <?php if($admin){?>
                 <a href="#" class="button-delete">Borrar</a>
+                <?php } ?>
             </div>
         </div>
         <?php }} else {

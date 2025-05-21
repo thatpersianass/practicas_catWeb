@@ -49,7 +49,7 @@ if(isset($_POST['upload'])) {
         if($fileError === 0){
             if($fileSize < 10000000000000){
 
-                $uploadDir = '../../uploads/' . $user_details['id'] . '/';
+                $uploadDir = '../../uploads/';
                 if (!file_exists($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
@@ -58,7 +58,7 @@ if(isset($_POST['upload'])) {
 
                 move_uploaded_file($fileTmpName, $fileDestination);
 
-                $query ="insert into files (real_name,name,type,user_id,size,folder_id) values('$fileNameNew','$name','$fileActualExt','$user_id','$fileSize','$folder_id')";
+                $query ="insert into files (real_name,name,type,size,folder_id) values('$fileNameNew','$name','$fileActualExt','$fileSize','$folder_id')";
                 mysqli_query($con, $query);
 
                 header("Location: admin-files.php?uploadsuccesfull");
@@ -109,7 +109,7 @@ if(isset($_POST['upload'])) {
 
                 </div>
 
-                <a href="../../index.php" class="nav-link">
+                <a href="admin-dashboard.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/home.png" alt="home">
                     </div>
@@ -137,7 +137,7 @@ if(isset($_POST['upload'])) {
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -161,21 +161,21 @@ if(isset($_POST['upload'])) {
 
             <div class="sidebar-content">
 
-                <a href="../index.php" class="nav-link">
+                <a href="admin-dashboard.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/home.png" alt="home">
                     </div>
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="admin-search.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/zoom.png" alt="home">
                     </div>
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -199,7 +199,7 @@ if(isset($_POST['upload'])) {
 
                 <div class="folder-box">
 
-                    <?php get_files($folder_details['id'],$con) ?>
+                    <?php get_files($_SESSION['is_admin'],$folder_details['id'],$con) ?>
 
                 </div>
 
@@ -235,12 +235,26 @@ if(isset($_POST['upload'])) {
                 </form>
             </div>
         </div>
+    </div>
 
+    <div class="modal-container" id="modal-preview">
+        <div class="modal">
+            <span class="title">
+                <h1>Vista previa del archivo</h1>
+            </span>
+            <div class="modal-content" id="preview-content">
+                <!-- Aquí se inserta dinámicamente un <iframe> o <img> -->
+            </div>
+            <div class="buttons">
+                <button type="button" class="button-secondary" id="close-preview">Cerrar</button>
+            </div>
+        </div>
     </div>
 
 
 </body>
 <script type="text/javascript" src="../../scripts/drag-file.js"></script>
 <script type="text/javascript" src="../../scripts/file-modal.js"></script>
+<script type="text/javascript" src="../../scripts/preview-modal.js"></script>
 
 </html>

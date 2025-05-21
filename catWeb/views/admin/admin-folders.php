@@ -69,7 +69,7 @@
 
                 </div>
 
-                <a href="#" class="nav-link">
+                <a href="admin-dashboard.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/home.png" alt="home">
                     </div>
@@ -97,7 +97,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -121,7 +121,7 @@
 
             <div class="sidebar-content">
 
-                <a href="../index.php" class="nav-link">
+                <a href="admin-dashboard.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/home.png" alt="home">
                     </div>
@@ -135,7 +135,7 @@
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="folder-box">
-                    <?php get_folders($user_details['id'],$con) ?>
+                    <?php get_folders($_SESSION['is_admin'],$user_details['id'],$con) ?>
                 </div>
 
             </div>

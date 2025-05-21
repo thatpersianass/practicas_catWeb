@@ -85,7 +85,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -123,7 +123,7 @@
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="#" class="nav-link">
+                <a href="../../functions/logout.php" class="nav-link">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>

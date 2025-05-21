@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2025 a las 13:59:23
+-- Tiempo de generación: 21-05-2025 a las 15:05:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `files` (
   `id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
   `folder_id` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `real_name` varchar(200) NOT NULL,
@@ -42,10 +41,11 @@ CREATE TABLE `files` (
 -- Volcado de datos para la tabla `files`
 --
 
-INSERT INTO `files` (`id`, `user_id`, `folder_id`, `name`, `real_name`, `size`, `type`, `created`) VALUES
-(3, 0, 1, 'Factura no tan sencilla.pdf', '682dbc5a4804d3.02566456.pdf', 100717, 'pdf', '2025-05-21 11:49:37'),
-(4, 0, 1, 'FacturaSencilla.pdf', '682dbd974b9065.06891422.pdf', 100717, 'pdf', '2025-05-21 11:48:39'),
-(5, 0, 4, 'Imagen Horizontal.jpg', '682dbe56222f08.98976373.jpg', 181519, 'jpg', '2025-05-21 11:51:50');
+INSERT INTO `files` (`id`, `folder_id`, `name`, `real_name`, `size`, `type`, `created`) VALUES
+(3, 1, 'Factura no tan sencilla.pdf', '682dbc5a4804d3.02566456.pdf', 100717, 'pdf', '2025-05-21 11:49:37'),
+(4, 1, 'FacturaSencilla.pdf', '682dbd974b9065.06891422.pdf', 100717, 'pdf', '2025-05-21 11:48:39'),
+(5, 4, 'Imagen Horizontal.jpg', '682dbe56222f08.98976373.jpg', 181519, 'jpg', '2025-05-21 11:51:50'),
+(6, 4, 'panas.jpg', '682dcb47448b77.91778727.jpg', 25676, 'jpg', '2025-05-21 12:47:03');
 
 -- --------------------------------------------------------
 
@@ -114,8 +114,7 @@ INSERT INTO `users` (`id`, `username`, `passwd`, `name`, `1surname`, `2surname`,
 --
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`,`folder_id`),
-  ADD KEY `folder_id` (`folder_id`);
+  ADD KEY `user_id` (`folder_id`);
 
 --
 -- Indices de la tabla `folders`
@@ -138,7 +137,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `folders`

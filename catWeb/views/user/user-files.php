@@ -1,3 +1,22 @@
+<?php
+    session_start();
+    include('../../functions/config.php');
+    include_once('../../functions/get_details.php');
+    include('../../functions/get_files_folders.php');
+
+    if (!isset($_SESSION['username'])) {
+        header("Location: ../../index.php");
+        exit();
+    }
+    $folder_selected = $_SESSION['folder_selected'];
+
+    $username = $_SESSION['username'];
+    $color = $_SESSION['color'];
+    $user_details = get_user_details($username,$con);
+    $folder_details = get_folder_details($folder_selected,$con);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,13 +25,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/buttons.css">
-    <title>Panel Admin</title>
+    <title>Archivos</title>
 </head>
 
 <body>
     <!-- Encabezado ========================================================== -->
     <header>
-        <span class="header-title">PANEL DE ADMINISTRADOR</span>
+        <span class="header-title"><?=$user_details['name']?> <?=$user_details['1surname']?>
+            <?=$user_details['2surname']?></span>
     </header>
 
     <div class="main-container">
@@ -24,10 +44,10 @@
                 <div class="user-box">
                     <nav class="user-info">
                         <div class="user-pfp">
-                            <img src="../../img/pfp/blue.webp">
+                            <img src="../../img/pfp/<?=$color?>.webp">
 
                         </div>
-                        <span class="username">Placeholder</span>
+                        <span class="username"><?= $username ?></span>
                     </nav>
 
                 </div>
@@ -61,10 +81,10 @@
         <nav class="mobile-navbar">
             <div class="user-info">
                 <span class="icon">
-                    <img src="../../img/pfp/admin.webp" alt="usr">
+                    <img src="../../img/pfp/<?=$color?>.webp" alt="usr">
                 </span>
                 <div class="username">
-                    <span class="innertext">Placeholder</span>
+                    <span class="innertext"><?= $username ?></span>
                 </div>
             </div>
 
@@ -90,7 +110,7 @@
         <main class="content">
             <div class="admin-dashboard">
                 <div class="title">
-                    <span class="inner-text">Archivos de placeholder - --carpeta-- </span>
+                    <span class="inner-text"></span>
                 </div>
                 <div class="search-box">
                     <input type="text" name="search-usr" id="search-usr" class="search-bar"
@@ -99,38 +119,7 @@
 
                 <div class="folder-box">
 
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/document.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    Factura.pdf
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="#" class="button-primary">Ver</a>
-                            <a href="" class="button-secondary">Descargar</a>
-                        </div>
-                    </div>
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/png.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    meme.png
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="#" class="button-primary">Ver</a>
-                            <a href="" class="button-secondary">Descargar</a>
-                        </div>
-                    </div>
+                    <?php get_files($_SESSION['is_admin'],$folder_details['id'],$con) ?>
 
                 </div>
 
@@ -140,8 +129,21 @@
 
     </div>
 
+    <div class="modal-container" id="modal-preview">
+        <div class="modal">
+            <span class="title">
+                <h1>Vista previa del archivo</h1>
+            </span>
+            <div class="modal-content" id="preview-content">
+                <!-- Aquí se inserta dinámicamente un <iframe> o <img> -->
+            </div>
+            <div class="buttons">
+                <button type="button" class="button-secondary" id="close-preview">Cerrar</button>
+            </div>
+        </div>
+    </div>
 
 
 </body>
-
+<script type="text/javascript" src="../../scripts/preview-modal.js"></script>
 </html>

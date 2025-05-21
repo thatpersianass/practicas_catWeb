@@ -1,5 +1,8 @@
 <?php
     session_start();
+    include('../../functions/config.php');
+    include_once('../../functions/get_details.php');
+    include('../../functions/get_files_folders.php');
 
     if (!isset($_SESSION['username'])) {
         header("Location: ../../index.php");
@@ -8,6 +11,7 @@
 
     $username = $_SESSION['username'];
     $color = $_SESSION['color'];
+    $user_details = get_user_details($username,$con);
 
 ?>
 
@@ -19,13 +23,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/buttons.css">
-    <title>Panel Admin</title>
+    <title>Carpetas</title>
 </head>
 
 <body>
     <!-- Encabezado ========================================================== -->
     <header>
-        <span class="header-title">PANEL DE ADMINISTRADOR</span>
+        <span class="header-title"><?=$user_details['name']?> <?=$user_details['1surname']?>
+                        <?=$user_details['2surname']?></span>
     </header>
 
     <div class="main-container">
@@ -103,42 +108,11 @@
         <main class="content">
             <div class="admin-dashboard">
                 <div class="title">
-                    <span class="inner-text">Carpetas de Placeholder</span>
+                    <span class="inner-text">Tus carpetas</span>
                 </div>
 
                 <div class="folder-box">
-
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/file.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    Documentos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="user-files.php" class="button-primary">Ver</a>
-                        </div>
-                    </div>
-                    <div class="folder-element">
-                        <div class="folder">
-                            <span class="icon">
-                                <img src="../../icons/file.png" alt="folder-icon">
-                            </span>
-                            <div class="folder-info">
-                                <span class="description">
-                                    Documentos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <a href="user-files.php" class="button-primary">Ver</a>
-                        </div>
-                    </div>
-
+                    <?php get_folders($_SESSION['is_admin'],$user_details['id'],$con) ?>
                 </div>
 
             </div>

@@ -46,6 +46,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/buttons.css">
     <title>Panel Admin</title>
 </head>
 
@@ -100,7 +101,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -138,7 +139,7 @@
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -193,11 +194,25 @@
                 </div>
         </main>
 
+    <div class="modal-container" id="modal-logout">
+        <div class="modal">
+            <span class="title">
+                <h1>¿Estas seguro?</h1>
+            </span>
+            <div class="modal-content">
+                <p>¿Estás seguro que deseas cerrar sesión?</p>
+            </div>
+            <div class="buttons">
+                <a href="../../functions/logout.php" class="button-delete">   Si   </a>
+                <a href="#" class="button-secondary" id="close-logout">No</a>
+            </div>
+        </div>
+    </div>
 
     </div>
 
 
 
 </body>
-
+<script type="text/javascript" src="../../scripts/logout-modal.js">
 </html>

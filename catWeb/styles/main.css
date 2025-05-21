@@ -461,6 +461,7 @@ header {
     left: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 9999;
 
     transition: opacity 0.3s ease;
 }
@@ -522,6 +523,15 @@ header {
     gap: 10px;
     align-items: end;
     justify-content: end;
+}
+
+#modal-preview .modal {
+    width: 60vw;
+}
+
+.modal-container p {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 /* Checkbox personalizado ========================================================== */
@@ -638,7 +648,7 @@ header {
     }
 
     .mobile-navbar {
-        position: fixed;
+        /* position: fixed; */
         display: flex;
         flex-direction: row;
     }
@@ -680,7 +690,7 @@ header {
     }
 
     .admin-dashboard {
-        margin-top: 120px;
+        /* margin-top: 120px; */
         width: 80vw;
     }
 
@@ -695,4 +705,8 @@ header {
         margin-left: 10px;
         width: 95%;
     }
+
+    #modal-preview .modal {
+    width: 90vw;
+}
 }
