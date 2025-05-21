@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2025 a las 15:05:51
+-- Tiempo de generación: 21-05-2025 a las 17:05:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,10 +42,7 @@ CREATE TABLE `files` (
 --
 
 INSERT INTO `files` (`id`, `folder_id`, `name`, `real_name`, `size`, `type`, `created`) VALUES
-(3, 1, 'Factura no tan sencilla.pdf', '682dbc5a4804d3.02566456.pdf', 100717, 'pdf', '2025-05-21 11:49:37'),
-(4, 1, 'FacturaSencilla.pdf', '682dbd974b9065.06891422.pdf', 100717, 'pdf', '2025-05-21 11:48:39'),
-(5, 4, 'Imagen Horizontal.jpg', '682dbe56222f08.98976373.jpg', 181519, 'jpg', '2025-05-21 11:51:50'),
-(6, 4, 'panas.jpg', '682dcb47448b77.91778727.jpg', 25676, 'jpg', '2025-05-21 12:47:03');
+(8, 1, 'factura1.pdf', '682de82b4bd1e7.85134887.pdf', 30134, 'pdf', '2025-05-21 14:50:19');
 
 -- --------------------------------------------------------
 
@@ -137,7 +134,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `folders`

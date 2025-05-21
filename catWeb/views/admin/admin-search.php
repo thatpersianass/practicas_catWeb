@@ -85,7 +85,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -123,7 +123,7 @@
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -156,7 +156,7 @@
         <div class="modal">
             <div class="title">
                 <h1>Crear Usuario</h1>
-                
+
             </div>
             <div class="modal-content">
                 <?= showError($errors['register']); ?>
@@ -183,16 +183,16 @@
                         <div class="checkboxes">
                             <span class="checkbox">
                                 <label for="admin" class="frutiger-checkbox">
-                                <input type="checkbox" name="admin" value="1">
-                                <span class="custom-check"></span>
-                                Administrador
+                                    <input type="checkbox" name="admin" value="1">
+                                    <span class="custom-check"></span>
+                                    Administrador
                                 </label>
                             </span>
                             <span class="checkbox">
                                 <label for="show-passwd" class="frutiger-checkbox">
-                                <input type="checkbox" name="show-passwd" value="1" onclick="mostrarContrasenia()">
-                                <span class="custom-check"></span>
-                                Mostrar Contraseña
+                                    <input type="checkbox" name="show-passwd" value="1" onclick="mostrarContrasenia()">
+                                    <span class="custom-check"></span>
+                                    Mostrar Contraseña
                                 </label>
                             </span>
                         </div>
@@ -218,7 +218,22 @@
         </div>
     </div>
 
+    <div class="modal-container" id="modal-logout">
+        <div class="modal">
+            <span class="title">
+                <h1>Cerrar sesión</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message">¿Estás seguro que deseas cerrar sesión?</p>
+            </div>
+            <div class="buttons">
+                <a href="../../functions/logout.php" class="button-delete"> Si </a>
+                <a href="#" class="button-secondary" id="close-logout">No</a>
+            </div>
+        </div>
+    </div>
 
+    </div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -258,5 +273,19 @@ if (isset($_SESSION['active_form'])) {
     unset($_SESSION['active_form']);
 }
 ?>
+
+<script type="text/javascript">
+const open_modal = document.getElementById('logout');
+const modal = document.getElementById('modal-logout');
+const close_modal = document.getElementById('close-logout');
+
+open_modal.addEventListener('click', () => {
+    modal.classList.add('show');
+});
+
+close_modal.addEventListener('click', () => {
+    modal.classList.remove('show');
+});
+</script>
 
 </html>

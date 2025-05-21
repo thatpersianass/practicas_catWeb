@@ -137,7 +137,7 @@ if(isset($_POST['upload'])) {
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -175,7 +175,7 @@ if(isset($_POST['upload'])) {
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -243,10 +243,40 @@ if(isset($_POST['upload'])) {
                 <h1>Vista previa del archivo</h1>
             </span>
             <div class="modal-content" id="preview-content">
-                <!-- Aquí se inserta dinámicamente un <iframe> o <img> -->
             </div>
             <div class="buttons">
                 <button type="button" class="button-secondary" id="close-preview">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-container" id="modal-logout">
+        <div class="modal">
+            <span class="title">
+                <h1>Cerrar sesión</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message">¿Estás seguro que deseas cerrar sesión?</p>
+            </div>
+            <div class="buttons">
+                <a href="../../functions/logout.php" class="button-delete"> Si </a>
+                <a href="#" class="button-secondary" id="close-logout">No</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-container" id="modal-delete-file">
+        <div class="modal">
+            <span class="title">
+                <h1>Eliminar Archivo</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message">¿Estás seguro que deseas eliminar este archivo?</p>
+                <p class="error-message">¡Esta acción no se puede revertir!</p>
+            </div>
+            <div class="buttons">
+                <a href="#" class="button-delete" id="confirm-delete">Sí</a>
+                <a href="#" class="button-secondary" id="cancel-delete">No</a>
             </div>
         </div>
     </div>
@@ -256,5 +286,18 @@ if(isset($_POST['upload'])) {
 <script type="text/javascript" src="../../scripts/drag-file.js"></script>
 <script type="text/javascript" src="../../scripts/file-modal.js"></script>
 <script type="text/javascript" src="../../scripts/preview-modal.js"></script>
+<script type="text/javascript"">
+const r_open = document.getElementById('logout');
+const a_modal_container = document.getElementById('modal-logout');
+const r_close = document.getElementById('close-logout');
+
+r_open.addEventListener('click', () => {
+    a_modal_container.classList.add('show');
+});
+
+r_close.addEventListener('click', () => {
+    a_modal_container.classList.remove('show');
+});
+</script>
 
 </html>

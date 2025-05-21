@@ -160,7 +160,8 @@
                             <img src="../../icons/users.png" alt="users-count">
                         </span>
                         <span class="inner-text">
-                            Hay <b class="special-text-1"><?= $users_registered ?></b> usuarios registrados en el Servicio
+                            Hay <b class="special-text-1"><?= $users_registered ?></b> usuarios registrados en el
+                            Servicio
                         </span>
                     </div>
 
@@ -188,31 +189,44 @@
                             <img src="../../icons/user.png" alt="users-count">
                         </span>
                         <span class="inner-text">
-                            <b class="special-text-1"><?= $latest_user ?></b> se ha registrado el <b class="special-text-1"><?= $date ?></b>
+                            <b class="special-text-1"><?= $latest_user ?></b> se ha registrado el <b
+                                class="special-text-1"><?= $date ?></b>
                         </span>
                     </div>
                 </div>
         </main>
 
-    <div class="modal-container" id="modal-logout">
-        <div class="modal">
-            <span class="title">
-                <h1>¿Estas seguro?</h1>
-            </span>
-            <div class="modal-content">
-                <p>¿Estás seguro que deseas cerrar sesión?</p>
-            </div>
-            <div class="buttons">
-                <a href="../../functions/logout.php" class="button-delete">   Si   </a>
-                <a href="#" class="button-secondary" id="close-logout">No</a>
+        <div class="modal-container" id="modal-logout">
+            <div class="modal">
+                <span class="title">
+                    <h1>Cerrar sesión</h1>
+                </span>
+                <div class="modal-content">
+                    <p class="error-message">¿Estás seguro que deseas cerrar sesión?</p>
+                </div>
+                <div class="buttons">
+                    <a href="../../functions/logout.php" class="button-delete"> Si </a>
+                    <a href="#" class="button-secondary" id="close-logout">No</a>
+                </div>
             </div>
         </div>
-    </div>
 
     </div>
 
 
 
 </body>
-<script type="text/javascript" src="../../scripts/logout-modal.js">
+<script type="text/javascript"">
+var open = document.getElementById('logout');
+var modal_container = document.getElementById('modal-logout');
+var close = document.getElementById('close-logout');
+
+open.addEventListener('click', () => {
+    modal_container.classList.add('show');
+});
+
+close.addEventListener('click', () => {
+    modal_container.classList.remove('show');
+});
+</script>
 </html>

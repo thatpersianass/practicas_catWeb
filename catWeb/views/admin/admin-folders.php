@@ -97,7 +97,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -135,7 +135,7 @@
                     <span class="description">Buscar Usuarios</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -183,9 +183,73 @@
             </div>
         </div>
     </div>
+    <div class="modal-container" id="modal-logout">
+        <div class="modal">
+            <span class="title">
+                <h1>Cerrar sesión</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message">¿Estás seguro que deseas cerrar sesión?</p>
+            </div>
+            <div class="buttons">
+                <a href="../../functions/logout.php" class="button-delete"> Si </a>
+                <a href="#" class="button-secondary" id="close-logout">No</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-container" id="modal-delete-folder" style="display:none;">
+        <div class="modal">
+            <span class="title">
+                <h1>Eliminar Carpeta</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message" id="delete-folder-message">¿Estás seguro que deseas eliminar esta carpeta?</p>
+                <p class="error-message">¡Esta acción no se puede revertir!</p>
+            </div>
+            <div class="buttons">
+                <a href="#" class="button-delete" id="confirm-delete-folder">Sí</a>
+                <a href="#" class="button-secondary" id="cancel-delete-folder">No</a>
+            </div>
+        </div>
+    </div>
 
 
     <script type="text/javascript" src="../../scripts/folder-modal.js"></script>
+    <script type="text/javascript"">
+    var modal_open = document.getElementById('logout');
+    var r_modal_container = document.getElementById('modal-logout');
+    var modal_close = document.getElementById('close-logout');
+
+    modal_open.addEventListener('click', () => {
+        r_modal_container.classList.add('show');
+    });
+
+    modal_close.addEventListener('click', () => {
+        r_modal_container.classList.remove('show');
+    });
+    </script>
+    <script>
+    document.querySelectorAll('.open-delete-modal').forEach(button => {
+    button.addEventListener('click', e => {
+        e.preventDefault();
+
+        const folderId = button.getAttribute('data-folder-id');
+        const folderName = button.getAttribute('data-folder-name');
+        
+        const msg = document.getElementById('delete-folder-message');
+        msg.textContent = `¿Estás seguro que deseas eliminar la carpeta " ${folderName}"?`; const
+        modal=document.getElementById('modal-delete-folder'); modal.style.display='flex' ; const
+        confirmBtn=document.getElementById('confirm-delete-folder');
+        confirmBtn.href=`../../functions/delete_folder.php?folder_id=${folderId}`; }); });
+        document.getElementById('cancel-delete-folder').addEventListener('click', e=>
+    {
+        e.preventDefault();
+        document.getElementById('modal-delete-folder').style.display = 'none';
+    });
+    </script>
 </body>
+
+
 
 </html>
