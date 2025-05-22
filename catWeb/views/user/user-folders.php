@@ -23,6 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/buttons.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
     <title>Carpetas</title>
 </head>
 
@@ -30,7 +31,7 @@
     <!-- Encabezado ========================================================== -->
     <header>
         <span class="header-title"><?=$user_details['name']?> <?=$user_details['1surname']?>
-                        <?=$user_details['2surname']?></span>
+            <?=$user_details['2surname']?></span>
     </header>
 
     <div class="main-container">
@@ -64,7 +65,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -95,7 +96,7 @@
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -121,8 +122,34 @@
 
     </div>
 
-
+    <!-- PopUp cerrado de sesión ========================================================== -->
+    <div class="modal-container" id="modal-logout">
+        <div class="modal">
+            <span class="title">
+                <h1>Cerrar sesión</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message">¿Estás seguro que deseas cerrar sesión?</p>
+            </div>
+            <div class="buttons">
+                <a href="../../functions/logout.php" class="button-delete"> Si </a>
+                <a href="#" class="button-secondary" id="close-logout">No</a>
+            </div>
+        </div>
+    </div>
 
 </body>
+<script type="text/javascript"">
+var u_open = document.getElementById('logout');
+var u_modal_container = document.getElementById('modal-logout');
+var u_close = document.getElementById('close-logout');
 
+u_open.addEventListener('click', () => {
+    u_modal_container.classList.add('show');
+});
+
+u_close.addEventListener('click', () => {
+    u_modal_container.classList.remove('show');
+});
+</script>
 </html>

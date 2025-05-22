@@ -25,6 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/buttons.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
     <title>Archivos</title>
 </head>
 
@@ -66,7 +67,7 @@
                     <span class="description">Archivos</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -97,7 +98,7 @@
                     <span class="description">Inicio</span>
                 </a>
 
-                <a href="../../functions/logout.php" class="nav-link">
+                <a href="#" class="nav-link" id="logout">
                     <div class="icon">
                         <img src="../../icons/close.png" alt="home">
                     </div>
@@ -126,7 +127,22 @@
             </div>
         </main>
 
+    </div>
 
+    <!-- PopUp cerrado de sesión ========================================================== -->
+    <div class="modal-container" id="modal-logout">
+        <div class="modal">
+            <span class="title">
+                <h1>Cerrar sesión</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message">¿Estás seguro que deseas cerrar sesión?</p>
+            </div>
+            <div class="buttons">
+                <a href="../../functions/logout.php" class="button-delete"> Si </a>
+                <a href="#" class="button-secondary" id="close-logout">No</a>
+            </div>
+        </div>
     </div>
 
     <div class="modal-container" id="modal-preview">
@@ -175,4 +191,20 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<!-- Mostrar cerrado de sesión ========================================================== -->
+<script type="text/javascript"">
+var open = document.getElementById('logout');
+var modal_container = document.getElementById('modal-logout');
+var close = document.getElementById('close-logout');
+
+open.addEventListener('click', () => {
+    modal_container.classList.add('show');
+});
+
+close.addEventListener('click', () => {
+    modal_container.classList.remove('show');
+});
+</script>
+
 </html>

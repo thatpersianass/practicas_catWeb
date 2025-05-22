@@ -47,6 +47,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/buttons.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
     <title>Panel Admin</title>
 </head>
 
