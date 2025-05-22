@@ -9,5 +9,6 @@
     <h1>Bienvenido</h1>
     <a href="pruebas/LOGINS/index.php">Prueba de LogIN</a><br>
     <a href="prototype/">Prototipo de aplicacion web</a>
+    <a href="catWeb/">Catalogador Web</a>
 </body>
 </html>
