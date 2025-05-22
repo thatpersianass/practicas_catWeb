@@ -112,7 +112,7 @@
                     <span class="inner-text">Tus carpetas</span>
                 </div>
 
-                <div class="folder-box">
+                <div class="folder-box show">
                     <?php get_folders($_SESSION['is_admin'],$user_details['id'],$con) ?>
                 </div>
 

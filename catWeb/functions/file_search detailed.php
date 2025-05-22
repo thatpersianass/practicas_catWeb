@@ -7,7 +7,7 @@ if (isset($_POST['input'])) {
     $input = $_POST['input'];
     $view = $_SESSION['active_view'] ?? 'simple';
 
-    $query = "SELECT * FROM files WHERE name LIKE '{$input}%'";
+    $query = "SELECT * FROM files WHERE name LIKE '{$input}%' OR type LIKE '{$input}%' OR created LIKE '{$input}%'";
     $result = mysqli_query($con, $query);
 
     if (mysqli_num_rows($result) > 0) {

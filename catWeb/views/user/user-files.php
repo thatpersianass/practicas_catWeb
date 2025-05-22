@@ -118,7 +118,7 @@
                         placeholder="  Introduce el nombre del archivo...">
                 </div>
 
-                <div class="folder-box" id="folder-box">
+                <div class="folder-box show" id="folder-box">
 
                     <?php get_files($_SESSION['is_admin'],$folder_details['id'],$con) ?>
 

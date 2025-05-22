@@ -98,6 +98,12 @@ if(isset($_POST['upload'])) {
     <link rel="icon" type="image/png" href="../../favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <title>Panel Admin</title>
+
+    <script>
+    window.onload = function() {
+        document.getElementById('search-usr').focus();
+    }
+    </script>
 </head>
 
 <body>
