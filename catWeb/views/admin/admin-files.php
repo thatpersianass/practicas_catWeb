@@ -4,6 +4,8 @@
     include('../../functions/get_details.php');
     include('../../functions/get_files_folders.php');
 
+    $active_view = $_SESSION['active_view'] ?? 'simple'; // Valor por defecto: 'simple'
+
     $username = $_SESSION['username'];
 
     $user_selected = $_SESSION['user_selected'];
@@ -73,6 +75,10 @@ if(isset($_POST['upload'])) {
         echo "You cannot upload files of this type!";
     }
 }
+
+if (isset($_POST['active_view'])) {
+    $_SESSION['active_view'] = $_POST['active_view'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +90,7 @@ if(isset($_POST['upload'])) {
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/buttons.css">
     <link rel="icon" type="image/png" href="../../favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <title>Panel Admin</title>
 </head>
 
@@ -197,13 +204,37 @@ if(isset($_POST['upload'])) {
                         placeholder="  Introduce el nombre del archivo...">
                     <button class="button-add" id="upload-file">Subir archivo</button>
                 </div>
+                <div class="views">
+                    <a href="#" class="button-icon <?= $active_view === 'simple' ? 'active' : '' ?>" id="general-view" title="Vista general"><img src="../../icons/general-view.png"></a>
+                    <a href="#" class="button-icon <?= $active_view === 'detailed' ? 'active' : '' ?>" id="deailed-view" title="Vista detallada"><img src="../../icons/detailed-view.png"></a>
+                </div>
 
-                <div class="folder-box" id="folder-box">
+                <div class="folder-box <?= $active_view === 'simple' ? 'show' : '' ?>" id="folder-box">
 
                     <?php get_files($_SESSION['is_admin'],$folder_details['id'],$con) ?>
 
                 </div>
 
+                <div class="folder-box-details <?= $active_view === 'detailed' ? 'show' : '' ?>" id="file-table">
+                    <table class="folder-table">
+                        <thead>
+                            <tr class="folder-element">
+                                <th><span class="description">Nombre</span></td>
+                                <th><span class="description">Tamaño</span></td>
+                                <th><span class="description">Fecha de creación <i class="bi bi-caret-down-fill"></i></span></td>
+                                <th><span class="description">Acciones</span></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="file-table-body">
+                            <?php get_files_detailed($_SESSION['is_admin'],$folder_details['id'],$con) ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="query-buttons">
+                    <a href="#" class="button-add">Exportar CSV</a>
+                    <a href="#" class="button-secondary">Imprimir</a>
+                </div>
             </div>
         </main>
 
@@ -298,29 +329,48 @@ if(isset($_POST['upload'])) {
 $(document).ready(function() {
 
     $("#search-usr").keyup(function() {
-
         var input = $(this).val();
         if (input != "") {
-            $("#folder-box").css("display", "flex")
-            $.ajax({
+            // Saber qué vista está activa
+            var activeView = "<?php echo $_SESSION['active_view'] ?? 'simple'; ?>";
 
-                url: "../../functions/file_search.php",
-                method: "POST",
-                data: {
-                    input: input
-                },
+            if (activeView === "detailed") {
+                // Mostrar la tabla (en caso esté oculta)
+                $("#folder-box").hide();
+                $("#file-table").show();
 
-                success: function(data) {
-                    $("#folder-box").html(data);
-                }
-            });
+                $.ajax({
+                    url: "../../functions/file_search.php",
+                    method: "POST",
+                    data: { input: input },
+                    success: function(data) {
+                        // Poner los <tr> en el tbody de la tabla
+                        $("#file-table-body").html(data);
+                    }
+                });
+
+            } else {
+                // Vista simple: mostrar carpeta, ocultar tabla
+                $("#folder-box").css("display", "flex");
+                $("#file-table").hide();
+
+                $.ajax({
+                    url: "../../functions/file_search.php",
+                    method: "POST",
+                    data: { input: input },
+                    success: function(data) {
+                        // Poner los divs en folder-box
+                        $("#folder-box").html(data);
+                    }
+                });
+            }
         } else {
-
             location.reload();
         }
     });
 });
 </script>
+
 
 <!-- PopUp cerrado de sesión  ========================================================== -->
 <script type="text/javascript"">
@@ -353,5 +403,46 @@ document.getElementById('cancel-delete').addEventListener('click', function(e){
     document.getElementById('modal-delete-file').classList.remove('show');
 });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const generalViewBtn = document.getElementById("general-view");
+    const detailedViewBtn = document.getElementById("deailed-view");
+
+    const folderBox = document.getElementById("folder-box");
+    const folderBoxDetails = document.querySelector(".folder-box-details");
+
+    generalViewBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        folderBox.classList.add("show");
+        folderBoxDetails.classList.remove("show");
+        setActiveView("simple");
+
+        generalViewBtn.classList.add("active");
+        detailedViewBtn.classList.remove("active");
+    });
+
+    detailedViewBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        folderBox.classList.remove("show");
+        folderBoxDetails.classList.add("show");
+        setActiveView("detailed");
+
+        generalViewBtn.classList.remove("active");
+        detailedViewBtn.classList.add("active");
+    });
+
+    function setActiveView(view) {
+        fetch("../../functions/set_view.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "active_view=" + encodeURIComponent(view)
+        });
+    }
+});
+</script>
+
 
 </html>

@@ -75,5 +75,49 @@
 </div>
 <?php }} else {
             echo "<h6 class='error-message big-font'> ESTA CARPETA NO CONTIENE NINGÚN ARCHIVO </h6>";
-        }}
+}}
+
+function get_files_detailed($admin,$folder_id,$con){
+    $query = "SELECT * FROM files WHERE folder_id = '$folder_id' ORDER BY created DESC";
+
+    $result = mysqli_query($con,$query);
+
+    if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_assoc($result)){
+                $id = $row['id'];
+                $folder_id = $row['folder_id'];
+                $name = $row['name'];
+                $real_name = $row['real_name'];
+                $size = $row['size'];
+                $type = $row['type'];
+                $created = $row['created'];
+                $filePath = "../../uploads/{$real_name}";
+        ?>
+<tr class="folder-element">
+    <td class="folder-name">
+        <div class="icon">
+            <img src="../../icons/<?=$type?>.png" alt="file-icon">
+        </div>
+        <span class="description">
+            <?=$name?>
+        </span>
+    </td>
+    <td>
+        <?=($size<1048576)?round($size/1024,2).' KB':round($size/1048576,2).' MB'?>
+    </td>
+    <td>
+        <?= $created ?>
+    </td>
+    <td>
+        <a href="#" class="button-primary" title="Ver archivo" onclick="showFilePreview('<?=$filePath?>'); return false;"><i class="bi bi-eye"></i></a>
+        <a href="<?=$filePath?>" download="<?=$name?>" class="button-secondary" title="Descargar archivo"><i class="bi bi-download"></i></a>
+        <?php if($admin){?>
+        <a href="#" class="button-delete" title="Eliminar" onclick="showDeleteModal('../../functions/delete_file.php?file=<?=urlencode($real_name)?>&id=<?=$id?>'); return false;"><i class="bi bi-trash3"></i></a>
+        <?php } ?>
+    </td>
+</tr>
+<?php }} else {
+            echo "<h6 class='error-message big-font'> ESTA CARPETA NO CONTIENE NINGÚN ARCHIVO </h6>";
+}}
+
 ?>

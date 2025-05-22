@@ -181,6 +181,16 @@ header {
     
 }
 
+.views {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
 /* Contador de usuarios,archivos y otros ==========================================================*/
 
 .user-count, .files-count, .last-user {
@@ -242,8 +252,6 @@ header {
     border-radius: 20px;
     color: black;
     text-shadow: 4px 4px 20px rgba(0,0,0,0.9);
-
-    transition: all 0.3s ease;
 }
 
 /* Barra de búsqueda ==========================================================*/
@@ -346,7 +354,7 @@ header {
 /* Muestra de carpetas ========================================================== */
 
 .folder-box {
-    display: flex;
+    display: none;
     justify-content: space-around;
     flex-wrap: wrap;
     width: 90%;
@@ -354,6 +362,10 @@ header {
     gap: 20px;
 
     margin-bottom: 20px;
+}
+
+.folder-box.show {
+    display: flex;
 }
 
 .folder-info {
@@ -406,6 +418,60 @@ header {
     /* width: 100px; */
 }
 
+/* Vista detallada */
+
+.folder-box-details {
+    display: none;
+}
+
+.folder-box-details.show{
+    display: flex;
+}
+
+.folder-box-details .folder-table {
+    width: 100%;
+}
+
+.folder-box-details .folder-table thead .folder-element{
+    width: 55vw;
+}
+
+.folder-box-details .folder-table thead .folder-element th{
+    width: 100%;
+}
+
+.folder-box-details .folder-element {
+    display: flex;
+    flex-direction: row;
+}
+
+.folder-box-details .folder-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.folder-box-details tbody .folder-element td {
+    width: 50%;
+    text-align: center;
+}
+
+.folder-box-details tbody .folder-element {
+    padding: 5px;
+    margin: 10px 0 10px 0;
+}
+
+.query-buttons {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+    padding: 10px;
+    margin: 10px 0 15px 0;
+    gap: 5px;
+}
 /* Boton de añadir */
 .add-button {
     display: flex;
