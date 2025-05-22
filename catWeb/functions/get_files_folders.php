@@ -21,17 +21,19 @@
         </div>
     </div>
     <div class="actions">
-        <a href="../../functions/update_folder_details.php?folder=<?php echo urlencode($id); ?>">
+        <a href="../../functions/update_folder_details.php?folder=<?= urlencode($id); ?>"
             class="button-primary">Abrir</a>
-        <?php if($admin){?>
-        echo '<a href="#" class="button-delete open-delete-modal" data-folder-id="' . $folder['id'] . '" data-folder-name="' . htmlspecialchars($folder['name']) . '">Borrar</a>';
-        <?php } ?>
+        <?php if($admin){
+        echo '<a href="#" class="button-delete open-delete-modal" data-folder-id="' . $id . '" data-folder-name="' . $name . '">Borrar</a>';
+        } ?>
     </div>
 </div>
 <?php }} else {
             echo "<h6 class='error-message big-font'> ESTE USUARIO NO TIENE CARPETAS ASOCIADAS </h6>";
         }}
 
+
+// Obtener carpetas
     function get_files($admin,$folder_id,$con){
         $query = "SELECT * FROM files WHERE folder_id = '$folder_id'";
 

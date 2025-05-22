@@ -198,7 +198,7 @@
         </div>
     </div>
 
-    <div class="modal-container" id="modal-delete-folder" style="display:none;">
+    <div class="modal-container" id="modal-delete-folder">
         <div class="modal">
             <span class="title">
                 <h1>Eliminar Carpeta</h1>
@@ -229,25 +229,34 @@
         r_modal_container.classList.remove('show');
     });
     </script>
-    <script>
-    document.querySelectorAll('.open-delete-modal').forEach(button => {
+
+
+<script>
+document.querySelectorAll('.open-delete-modal').forEach(button => {
     button.addEventListener('click', e => {
         e.preventDefault();
 
-        const folderId = button.getAttribute('data-folder-id');
-        const folderName = button.getAttribute('data-folder-name');
-        
+        const folderId = e.currentTarget.getAttribute('data-folder-id');
+        const folderName = e.currentTarget.getAttribute('data-folder-name');
+
         const msg = document.getElementById('delete-folder-message');
-        msg.textContent = `¿Estás seguro que deseas eliminar la carpeta " ${folderName}"?`; const
-        modal=document.getElementById('modal-delete-folder'); modal.style.display='flex' ; const
-        confirmBtn=document.getElementById('confirm-delete-folder');
-        confirmBtn.href=`../../functions/delete_folder.php?folder_id=${folderId}`; }); });
-        document.getElementById('cancel-delete-folder').addEventListener('click', e=>
-    {
-        e.preventDefault();
-        document.getElementById('modal-delete-folder').style.display = 'none';
+        msg.textContent = `¿Estás seguro que deseas eliminar la carpeta "${folderName}" y todos los archivos asociados?`;
+
+        const modal = document.getElementById('modal-delete-folder');
+        modal.classList.add('show');
+
+        const confirmBtn = document.getElementById('confirm-delete-folder');
+        confirmBtn.href = `../../functions/delete_folder.php?folder_id=${folderId}`;
     });
-    </script>
+});
+
+document.getElementById('cancel-delete-folder').addEventListener('click', e => {
+    e.preventDefault();
+    const modal = document.getElementById('modal-delete-folder');
+    modal.classList.remove('show');
+});
+</script>
+
 </body>
 
 
