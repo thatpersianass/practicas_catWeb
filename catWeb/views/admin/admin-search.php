@@ -150,13 +150,12 @@
         </main>
     </div>
 
-    <!-- Modal/Popup -->
+    <!-- PopUp de creación de usuarios ========================================================== -->
     <div class="modal-container <?= (isset($_SESSION['active_form']) && $_SESSION['active_form'] === 'register') ? 'show' : '' ?>"
         id="modal-add-user">
         <div class="modal">
             <div class="title">
                 <h1>Crear Usuario</h1>
-
             </div>
             <div class="modal-content">
                 <?= showError($errors['register']); ?>
@@ -197,7 +196,7 @@
                             </span>
                         </div>
                     </div>
-
+<!-- Script para mostrar la contraseña introducida  ========================================================== -->
                     <script type="text/javascript">
                     function mostrarContrasenia() {
                         var x = document.getElementById("passwd");
@@ -218,6 +217,7 @@
         </div>
     </div>
 
+    <!-- PopUp de cerrado de sesión  ========================================================== -->
     <div class="modal-container" id="modal-logout">
         <div class="modal">
             <span class="title">
@@ -235,11 +235,32 @@
 
     </div>
 
+    <!-- PopUp de eliminacion de un usuario  ========================================================== -->
+    <div class="modal-container" id="modal-delete-user">
+        <div class="modal">
+            <span class="title">
+                <h1>Eliminar Usuario</h1>
+            </span>
+            <div class="modal-content">
+                <p class="error-message" id="delete-user-message">
+                    ¿Estás seguro que deseas eliminar este usuario?
+                </p>
+                <p class="error-message">¡Esto eliminará también sus carpetas y archivos!</p>
+            </div>
+            <div class="buttons">
+                <a href="#" class="button-delete" id="confirm-delete-user">Sí</a>
+                <a href="#" class="button-secondary" id="cancel-delete-user">No</a>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="../../scripts/user-modal.js"></script>
 
+<!-- Script de busqueda de usuarios  ========================================================== -->
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -274,6 +295,7 @@ if (isset($_SESSION['active_form'])) {
 }
 ?>
 
+<!-- Script para mostrar el cerrado de sesion  ========================================================== -->
 <script type="text/javascript">
 const open_modal = document.getElementById('logout');
 const modal = document.getElementById('modal-logout');
@@ -288,4 +310,41 @@ close_modal.addEventListener('click', () => {
 });
 </script>
 
+<!-- Script para mostrar eliminación de usuario  ========================================================== -->
+<script>
+document.getElementById('user-display-box').addEventListener('click', function(e) {
+    const btn = e.target.closest('.open-delete-user-modal');
+    if (!btn) return;
+
+    e.preventDefault();
+
+    const userId = btn.getAttribute('data-user-id');
+    const userName = btn.getAttribute('data-user-name');
+
+    const msg = document.getElementById('delete-user-message');
+    msg.textContent = `¿Estás seguro que deseas eliminar al usuario "${userName}"?`;
+
+    const modal = document.getElementById('modal-delete-user');
+    modal.classList.add('show');
+
+    const confirmBtn = document.getElementById('confirm-delete-user');
+    confirmBtn.setAttribute('data-href', `../../functions/delete_user.php?user_id=${userId}`);
+});
+
+
+document.getElementById('confirm-delete-user').addEventListener('click', e => {
+    e.preventDefault();
+
+    const url = e.target.getAttribute('data-href');
+    if (url) {
+        window.location.href = url;
+    }
+});
+
+document.getElementById('cancel-delete-user').addEventListener('click', e => {
+    e.preventDefault();
+    const modal = document.getElementById('modal-delete-user');
+    modal.classList.remove('show');
+})
+</script>
 </html>

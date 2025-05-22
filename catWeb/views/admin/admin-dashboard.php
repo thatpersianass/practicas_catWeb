@@ -167,6 +167,7 @@
 
                 </div>
 
+                <!-- Información del server ========================================================== -->
                 <div class="files-count">
                     <div class="topbar">
                         <span class="innertext">Archivos Subidos</span>
@@ -196,6 +197,7 @@
                 </div>
         </main>
 
+        <!-- PopUp cerrado de sesión ========================================================== -->
         <div class="modal-container" id="modal-logout">
             <div class="modal">
                 <span class="title">
@@ -216,6 +218,7 @@
 
 
 </body>
+<!-- Mostrar cerrado de sesión ========================================================== -->
 <script type="text/javascript"">
 var open = document.getElementById('logout');
 var modal_container = document.getElementById('modal-logout');

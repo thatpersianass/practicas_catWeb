@@ -162,7 +162,7 @@
             </div>
         </main>
 
-        <!-- Popup Crear Carpeta -->
+        <!-- Popup Crear Carpeta  ========================================================== -->
         <div class="modal-container" id="modal-add-folder">
             <div class="modal">
                 <span class="title">
@@ -183,6 +183,7 @@
             </div>
         </div>
     </div>
+    <!-- PopUp cerrado de sesion  ========================================================== -->
     <div class="modal-container" id="modal-logout">
         <div class="modal">
             <span class="title">
@@ -198,6 +199,7 @@
         </div>
     </div>
 
+    <!-- PopUp eliminacion de carpeta  ========================================================== -->
     <div class="modal-container" id="modal-delete-folder">
         <div class="modal">
             <span class="title">
@@ -216,6 +218,8 @@
 
 
     <script type="text/javascript" src="../../scripts/folder-modal.js"></script>
+
+    <!-- Mostrar cerrado de sesión  ========================================================== -->
     <script type="text/javascript"">
     var modal_open = document.getElementById('logout');
     var r_modal_container = document.getElementById('modal-logout');
@@ -230,7 +234,7 @@
     });
     </script>
 
-
+<!-- Mostrar eliminación de carpetas  ========================================================== -->
 <script>
 document.querySelectorAll('.open-delete-modal').forEach(button => {
     button.addEventListener('click', e => {

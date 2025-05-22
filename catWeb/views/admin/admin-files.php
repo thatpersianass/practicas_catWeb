@@ -197,7 +197,7 @@ if(isset($_POST['upload'])) {
                     <button class="button-add" id="upload-file">Subir archivo</button>
                 </div>
 
-                <div class="folder-box">
+                <div class="folder-box" id="folder-box">
 
                     <?php get_files($_SESSION['is_admin'],$folder_details['id'],$con) ?>
 
@@ -209,6 +209,7 @@ if(isset($_POST['upload'])) {
 
     </div>
 
+    <!-- PopUp subida de archivos ========================================================== -->
     <div class="modal-container" id="modal-upload-file">
         <div class="modal">
             <span class="title">
@@ -237,6 +238,8 @@ if(isset($_POST['upload'])) {
         </div>
     </div>
 
+    <!-- PopUp de previsualización de archivos ========================================================== -->
+
     <div class="modal-container" id="modal-preview">
         <div class="modal">
             <span class="title">
@@ -250,6 +253,7 @@ if(isset($_POST['upload'])) {
         </div>
     </div>
 
+    <!-- PopUp Cerrado de sesión ========================================================== -->
     <div class="modal-container" id="modal-logout">
         <div class="modal">
             <span class="title">
@@ -265,6 +269,7 @@ if(isset($_POST['upload'])) {
         </div>
     </div>
 
+    <!-- PopUp borrar archivo ========================================================== -->
     <div class="modal-container" id="modal-delete-file">
         <div class="modal">
             <span class="title">
@@ -283,9 +288,40 @@ if(isset($_POST['upload'])) {
 
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="../../scripts/drag-file.js"></script>
 <script type="text/javascript" src="../../scripts/file-modal.js"></script>
 <script type="text/javascript" src="../../scripts/preview-modal.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $("#search-usr").keyup(function() {
+
+        var input = $(this).val();
+        if (input != "") {
+            $("#folder-box").css("display", "flex")
+            $.ajax({
+
+                url: "../../functions/file_search.php",
+                method: "POST",
+                data: {
+                    input: input
+                },
+
+                success: function(data) {
+                    $("#folder-box").html(data);
+                }
+            });
+        } else {
+
+            location.reload();
+        }
+    });
+});
+</script>
+
+<!-- PopUp cerrado de sesión  ========================================================== -->
 <script type="text/javascript"">
 const r_open = document.getElementById('logout');
 const a_modal_container = document.getElementById('modal-logout');
@@ -297,6 +333,23 @@ r_open.addEventListener('click', () => {
 
 r_close.addEventListener('click', () => {
     a_modal_container.classList.remove('show');
+});
+</script>
+
+<!-- PopUp eliminación de archivo ========================================================== -->
+<script>
+    function showDeleteModal(deleteUrl) {
+    const modal = document.getElementById('modal-delete-file');
+    const confirmBtn = document.getElementById('confirm-delete');
+    
+    modal.classList.add('show');
+    confirmBtn.setAttribute('href', deleteUrl);
+}
+
+
+document.getElementById('cancel-delete').addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('modal-delete-file').classList.remove('show');
 });
 </script>
 
