@@ -407,16 +407,96 @@ document.getElementById('cancel-delete').addEventListener('click', function(e){
 });
 </script>
 <script>
-document.addEventListener(" DOMContentLoaded", function () { const
-    generalViewBtn=document.getElementById("general-view"); const
-    detailedViewBtn=document.getElementById("detailed-view"); const folderBox=document.getElementById("folder-box");
-    const fileTable=document.getElementById("file-table"); generalViewBtn.addEventListener("click", function (e) {
-    e.preventDefault(); // Asignar clase active al botón generalViewBtn.classList.add("active");
-    detailedViewBtn.classList.remove("active"); // Mostrar vista general y ocultar la detallada
-    folderBox.classList.add("show"); fileTable.classList.remove("show"); // Guardar en sesión por AJAX
-    setActiveView("simple"); }); detailedViewBtn.addEventListener("click", function (e) { e.preventDefault(); // Asignar
-    clase active al botón detailedViewBtn.classList.add("active"); generalViewBtn.classList.remove("active"); // Mostrar
-    vista detallada y ocultar la general fileTable.classList.add("show"); folderBox.classList.remove("show"); // Guardar
-    en sesión por AJAX setActiveView("detailed"); }); function setActiveView(view) { fetch("", { method: "POST" ,
-    headers: { "Content-Type" : "application/x-www-form-urlencoded" }, body: "active_view=" + view }); } }); </script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const generalViewBtn = document.getElementById("general-view");
+    const detailedViewBtn = document.getElementById("detailed-view");
+    const folderBox = document.getElementById("folder-box");
+    const fileTable = document.getElementById("file-table");
+
+    generalViewBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        // Asignar clase active al botón
+        generalViewBtn.classList.add("active");
+        detailedViewBtn.classList.remove("active");
+        // Mostrar vista general y ocultar la detallada
+        folderBox.classList.add("show");
+        fileTable.classList.remove("show");
+        // Guardar en sesión por AJAX
+        setActiveView("simple");
+    });
+
+    detailedViewBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        // Asignar clase active al botón
+        detailedViewBtn.classList.add("active");
+        generalViewBtn.classList.remove("active");
+        // Mostrar vista detallada y ocultar la general
+        fileTable.classList.add("show");
+        folderBox.classList.remove("show");
+        // Guardar en sesión por AJAX
+        setActiveView("detailed");
+    });
+
+    function setActiveView(view) {
+        fetch("", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "active_view=" + view
+        });
+    }
+    });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const table = document.getElementById('file-table');
+const headers = table.querySelectorAll('th.sortable');
+let sortDirection = {};
+
+headers.forEach((header, index) => {
+    sortDirection[index] = 'asc';
+
+    header.addEventListener('click', () => {
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const sortType = header.getAttribute('data-sort');
+
+    rows.sort((a, b) => {
+        let aText = a.children[index].textContent.trim();
+        let bText = b.children[index].textContent.trim();
+
+        if (sortType === 'size') {
+        const sizeToBytes = (sizeStr) => {
+            const [value, unit] = sizeStr.split(' ');
+            const valNum = parseFloat(value);
+            if (unit === 'KB') return valNum * 1024;
+            if (unit === 'MB') return valNum * 1048576;
+            return valNum;
+        }
+        aText = sizeToBytes(aText);
+        bText = sizeToBytes(bText);
+        }
+
+        else if (sortType === 'created') {
+        aText = new Date(aText);
+        bText = new Date(bText);
+        }
+
+        else {
+        aText = aText.toLowerCase();
+        bText = bText.toLowerCase();
+        }
+
+        if (aText > bText) return sortDirection[index] === 'asc' ? 1 : -1;
+        if (aText < bText) return sortDirection[index] === 'asc' ? -1 : 1;
+        return 0;
+    });
+
+    sortDirection[index] = sortDirection[index] === 'asc' ? 'desc' : 'asc';
+
+    rows.forEach(row => tbody.appendChild(row));
+    });
+});
+});
+</script>
+
 < /html>

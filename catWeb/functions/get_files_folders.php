@@ -31,8 +31,10 @@
 <?php }} else {
             echo "<h6 class='error-message big-font'> ESTE USUARIO NO TIENE CARPETAS ASOCIADAS </h6>";
         }}
+?>
 
 
+<?php
 // Obtener carpetas
     function get_files($admin,$folder_id,$con){
         $query = "SELECT * FROM files WHERE folder_id = '$folder_id'";
@@ -83,12 +85,12 @@ function get_files_detailed($admin,$folder_id,$con){
     $result = mysqli_query($con,$query);
 
     if(mysqli_num_rows($result) > 0){
-            echo '                    <table class="folder-table">
+            echo '                    <table class="folder-table" id="file-table">
                 <thead>
                     <tr class="folder-element">
-                        <th><span class="description">Nombre</span></td>
-                        <th><span class="description">Tamaño</span></td>
-                        <th><span class="description">Fecha de creación <i class="bi bi-caret-down-fill"></i></span></td>
+                        <th data-sort="name" class="sortable"><span class="description">Nombre</span></th>
+                        <th data-sort="size" class="sortable"><span class="description">Tamaño</span></th>
+                        <th data-sort="created" class="sortable"><span class="description">Fecha de creación <i class="bi bi-caret-down-fill"></i></span></th>
                         <th><span class="description">Acciones</span></th>
                     </tr>
                 </thead>
@@ -138,3 +140,4 @@ function get_files_detailed($admin,$folder_id,$con){
 }}
 
 ?>
+
