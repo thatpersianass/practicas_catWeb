@@ -353,6 +353,10 @@ header {
 
 /* Muestra de carpetas ========================================================== */
 
+.hide {
+    display: none !important;
+}
+
 .folder-box {
     display: none;
     justify-content: space-around;
@@ -365,7 +369,7 @@ header {
 }
 
 .folder-box.show {
-    display: flex;
+    display: flex !important;
 }
 
 .folder-info {
@@ -425,7 +429,7 @@ header {
 }
 
 .folder-box-details.show{
-    display: flex;
+    display: flex !important;
 }
 
 .folder-box-details .folder-table {

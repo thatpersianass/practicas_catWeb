@@ -83,6 +83,17 @@ function get_files_detailed($admin,$folder_id,$con){
     $result = mysqli_query($con,$query);
 
     if(mysqli_num_rows($result) > 0){
+            echo '                    <table class="folder-table">
+                <thead>
+                    <tr class="folder-element">
+                        <th><span class="description">Nombre</span></td>
+                        <th><span class="description">Tamaño</span></td>
+                        <th><span class="description">Fecha de creación <i class="bi bi-caret-down-fill"></i></span></td>
+                        <th><span class="description">Acciones</span></th>
+                    </tr>
+                </thead>
+
+                <tbody id="file-table-body">';
             while($row = mysqli_fetch_assoc($result)){
                 $id = $row['id'];
                 $folder_id = $row['folder_id'];
@@ -109,14 +120,20 @@ function get_files_detailed($admin,$folder_id,$con){
         <?= $created ?>
     </td>
     <td>
-        <a href="#" class="button-primary" title="Ver archivo" onclick="showFilePreview('<?=$filePath?>'); return false;"><i class="bi bi-eye"></i></a>
-        <a href="<?=$filePath?>" download="<?=$name?>" class="button-secondary" title="Descargar archivo"><i class="bi bi-download"></i></a>
+        <a href="#" class="button-primary" title="Ver archivo"
+            onclick="showFilePreview('<?=$filePath?>'); return false;"><i class="bi bi-eye"></i></a>
+        <a href="<?=$filePath?>" download="<?=$name?>" class="button-secondary" title="Descargar archivo"><i
+                class="bi bi-download"></i></a>
         <?php if($admin){?>
-        <a href="#" class="button-delete" title="Eliminar" onclick="showDeleteModal('../../functions/delete_file.php?file=<?=urlencode($real_name)?>&id=<?=$id?>'); return false;"><i class="bi bi-trash3"></i></a>
+        <a href="#" class="button-delete" title="Eliminar"
+            onclick="showDeleteModal('../../functions/delete_file.php?file=<?=urlencode($real_name)?>&id=<?=$id?>'); return false;"><i
+                class="bi bi-trash3"></i></a>
         <?php } ?>
     </td>
 </tr>
-<?php }} else {
+
+<?php }echo '</tbody>
+</table>';} else {
             echo "<h6 class='error-message big-font'> ESTA CARPETA NO CONTIENE NINGÚN ARCHIVO </h6>";
 }}
 
