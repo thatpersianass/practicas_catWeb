@@ -276,6 +276,11 @@ header {
     color: black;
 }
 
+.search-box .search-bar.wider {
+    width: 100%;
+    height: 30px;
+}
+
 /* Muestra de usuarios ==========================================================*/
 
 .user-display-box {

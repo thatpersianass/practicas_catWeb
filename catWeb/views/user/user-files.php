@@ -120,10 +120,10 @@
         <main class="content">
             <div class="admin-dashboard">
                 <div class="title">
-                    <span class="inner-text"></span>
+                    <span class="inner-text">Tus archivos - <?=$folder_details['name']?></span>
                 </div>
                 <div class="search-box">
-                    <input type="text" name="search-usr" id="search-usr" class="search-bar"
+                    <input type="text" name="search-usr" id="search-usr" class="search-bar wider"
                         placeholder="  Introduce el nombre del archivo...">
                 </div>
 
