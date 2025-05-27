@@ -4,13 +4,6 @@
     include('../../functions/get_details.php');
     include('../../functions/get_files_folders.php');
 
-    if (isset($_GET['view'])) {
-    if ($_GET['view'] === 'detailed') {
-        $_SESSION['active_view'] = 'detailed';
-    } else {
-        $_SESSION['active_view'] = 'simple';
-    }
-}
     $active_view = $_SESSION['active_view'] ?? 'simple'; // Valor por defecto: 'simple'
 
     $username = $_SESSION['username'];
@@ -416,6 +409,8 @@ $(document).ready(function() {
 
     $("#search-usr").keyup(function() {
         var input = $(this).val();
+        var folder_id = "<?php echo $folder_details['id'] ?? ''; ?>";
+
         if (input != "") {
             // Saber qué vista está activa
             var activeView = "<?php echo $_SESSION['active_view'] ?? 'simple'; ?>";
@@ -429,7 +424,8 @@ $(document).ready(function() {
                     url: "../../functions/file_search.php",
                     method: "POST",
                     data: {
-                        input: input
+                        input: input,
+                        folder_id: folder_id
                     },
                     success: function(data) {
                         // Poner los <tr> en el tbody de la tabla
@@ -446,7 +442,8 @@ $(document).ready(function() {
                     url: "../../functions/file_search.php",
                     method: "POST",
                     data: {
-                        input: input
+                        input: input,
+                        folder_id: folder_id
                     },
                     success: function(data) {
                         // Poner los divs en folder-box
@@ -501,6 +498,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnSimple = document.getElementById('general-view');
     const boxSimple = document.getElementById('folder-box');
     const boxDetailed = document.getElementById('file-table');
+    const btnCSV = document.getElementById('export-csv');
+    const btnPDF = document.getElementById('export-pdf');
 
     function setActiveView(view) {
         if (view === 'detailed') {
@@ -511,6 +510,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             btnDetailed.classList.add('active');
             btnSimple.classList.remove('active');
+
+            btnCSV.classList.remove('hide');
+            btnCSV.classList.add('show');
+            btnPDF.classList.remove('hide');
+            btnPDF.classList.add('show');
         } else {
             boxSimple.classList.remove('hide');
             boxSimple.classList.add('show');
@@ -519,20 +523,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
             btnDetailed.classList.remove('active');
             btnSimple.classList.add('active');
+
+            btnCSV.classList.remove('show');
+            btnCSV.classList.add('hide');
+            btnPDF.classList.remove('show');
+            btnPDF.classList.add('hide');
         }
     }
 
-    // Evitar navegación con enlaces y manejar con JS
+    // Obtener la vista desde la URL
+    function getViewFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const view = params.get('view');
+        if (view === 'detailed' || view === 'general') {
+            return view === 'detailed' ? 'detailed' : 'simple';
+        }
+        return 'simple'; // valor por defecto
+    }
+
+    // Al cargar la página, aplicar vista según URL
+    setActiveView(getViewFromURL());
+
     btnDetailed.addEventListener('click', function (e) {
         e.preventDefault();
-        setActiveView('detailed');
         history.replaceState(null, '', '?view=detailed');
+        location.reload();
     });
 
     btnSimple.addEventListener('click', function (e) {
         e.preventDefault();
-        setActiveView('simple');
         history.replaceState(null, '', '?view=general');
+        location.reload();
     });
 });
 </script>
@@ -591,5 +612,4 @@ headers.forEach((header, index) => {
 });
 });
 </script>
-
 < /html>

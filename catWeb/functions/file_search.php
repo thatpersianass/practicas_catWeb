@@ -6,8 +6,9 @@ if (isset($_POST['input'])) {
     $admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
     $input = $_POST['input'];
     $view = $_SESSION['active_view'] ?? 'simple';
+    $folder_id = $_POST['folder_id'];
 
-    $query = "SELECT * FROM files WHERE name LIKE '{$input}%'";
+    $query = "SELECT * FROM files WHERE name LIKE '{$input}%' AND folder_id = '{$folder_id}'";
     $result = mysqli_query($con, $query);
 
     if (mysqli_num_rows($result) > 0) {
