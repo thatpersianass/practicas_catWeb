@@ -235,7 +235,7 @@ if(isset($_POST['upload'])) {
                 </div>
                 <div class="query-buttons">
                     <a href="#" class="button-add" id="export-csv">Exportar CSV</a>
-                    <a href="#" class="button-secondary">Imprimir</a>
+                    <a href="#" class="button-secondary" id="export-pdf">Imprimir</a>
                 </div>
             </div>
         </main>
@@ -320,6 +320,7 @@ if(isset($_POST['upload'])) {
         </div>
     </div>
 
+    <!-- Exportación a CSV de la búsqueda detallada ==================================== -->
     <script>
         document.getElementById("export-csv").addEventListener("click", function(e) {
             e.preventDefault();
@@ -357,13 +358,57 @@ if(isset($_POST['upload'])) {
         });
     </script>
 
+<!-- Exportar a PDF ======================================================= -->
+<script>
+document.getElementById("export-pdf").addEventListener("click", function(e) {
+    e.preventDefault();
 
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const table = document.querySelector("#file-table table");
+    if (!table) return alert("No se encontró la tabla para exportar.");
+
+    // Obtener headers (sin columna Acciones)
+    let headers = [];
+    table.querySelectorAll("thead tr th").forEach((th, i, arr) => {
+        if (i < arr.length - 1) { // excluye última columna
+            headers.push(th.innerText.trim());
+        }
+    });
+
+    // Obtener filas de datos (sin columna Acciones)
+    let data = [];
+    table.querySelectorAll("tbody tr").forEach(row => {
+        let rowData = [];
+        const cols = row.querySelectorAll("td");
+        for (let i = 0; i < cols.length - 1; i++) { // excluye última columna
+            rowData.push(cols[i].innerText.trim());
+        }
+        data.push(rowData);
+    });
+
+    doc.autoTable({
+        head: [headers],
+        body: data,
+        startY: 10,
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [22, 160, 133] },
+        alternateRowStyles: { fillColor: [238, 238, 238] },
+    });
+
+    doc.autoPrint();
+    window.open(doc.output('bloburl'), '_blank');
+});
+</script>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="../../scripts/drag-file.js"></script>
 <script type="text/javascript" src="../../scripts/file-modal.js"></script>
 <script type="text/javascript" src="../../scripts/preview-modal.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
 <!-- Busqueda de archivos ========================================================== -->
 <script type="text/javascript">
