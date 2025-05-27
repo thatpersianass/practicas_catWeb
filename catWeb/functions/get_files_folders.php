@@ -90,7 +90,7 @@ function get_files_detailed($admin,$folder_id,$con){
                     <tr class="folder-element">
                         <th data-sort="name" class="sortable"><span class="description">Nombre</span></th>
                         <th data-sort="size" class="sortable"><span class="description">Tamaño</span></th>
-                        <th data-sort="created" class="sortable"><span class="description">Fecha de creación <i class="bi bi-caret-down-fill"></i></span></th>
+                        <th data-sort="created" class="sortable"><span class="description">Fecha de creación</span></th>
                         <th><span class="description">Acciones</span></th>
                     </tr>
                 </thead>

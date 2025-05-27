@@ -11,9 +11,6 @@
         $_SESSION['active_view'] = 'simple';
     }
 }
-$active_view = $_SESSION['active_view'] ?? 'simple';
-
-
     $active_view = $_SESSION['active_view'] ?? 'simple'; // Valor por defecto: 'simple'
 
     $username = $_SESSION['username'];
@@ -237,7 +234,7 @@ if(isset($_POST['upload'])) {
                     ?>
                 </div>
                 <div class="query-buttons">
-                    <a href="#" class="button-add">Exportar CSV</a>
+                    <a href="#" class="button-add" id="export-csv">Exportar CSV</a>
                     <a href="#" class="button-secondary">Imprimir</a>
                 </div>
             </div>
@@ -323,6 +320,44 @@ if(isset($_POST['upload'])) {
         </div>
     </div>
 
+    <script>
+        document.getElementById("export-csv").addEventListener("click", function(e) {
+            e.preventDefault();
+
+            const table = document.querySelector("#file-table table");
+            if (!table) return alert("No se encontró la tabla para exportar.");
+
+            let csv = [];
+            const rows = table.querySelectorAll("tr");
+
+            for (let row of rows) {
+                let cols = row.querySelectorAll("th, td");
+                let rowData = [];
+
+                // Excluir la última columna (Acciones)
+                for (let i = 0; i < cols.length - 1; i++) {
+                    let data = cols[i].innerText.replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, '""');
+                    rowData.push(`"${data}"`);
+                }
+
+                csv.push(rowData.join(","));
+            }
+
+            const csvString = csv.join("\n");
+            const blob = new Blob([csvString], { type: "text/csv" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "archivos_exportados.csv";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+
+
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -330,6 +365,7 @@ if(isset($_POST['upload'])) {
 <script type="text/javascript" src="../../scripts/file-modal.js"></script>
 <script type="text/javascript" src="../../scripts/preview-modal.js"></script>
 
+<!-- Busqueda de archivos ========================================================== -->
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -412,46 +448,52 @@ document.getElementById('cancel-delete').addEventListener('click', function(e){
     document.getElementById('modal-delete-file').classList.remove('show');
 });
 </script>
+
+<!-- Vistas detallada y simple ======================================================= -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const generalViewBtn = document.getElementById("general-view");
-    const detailedViewBtn = document.getElementById("detailed-view");
-    const folderBox = document.getElementById("folder-box");
-    const fileTable = document.getElementById("file-table");
-
-    generalViewBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        // Asignar clase active al botón
-        generalViewBtn.classList.add("active");
-        detailedViewBtn.classList.remove("active");
-        // Mostrar vista general y ocultar la detallada
-        folderBox.classList.add("show");
-        fileTable.classList.remove("show");
-        // Guardar en sesión por AJAX
-        setActiveView("simple");
-    });
-
-    detailedViewBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        // Asignar clase active al botón
-        detailedViewBtn.classList.add("active");
-        generalViewBtn.classList.remove("active");
-        // Mostrar vista detallada y ocultar la general
-        fileTable.classList.add("show");
-        folderBox.classList.remove("show");
-        // Guardar en sesión por AJAX
-        setActiveView("detailed");
-    });
+document.addEventListener("DOMContentLoaded", function () {
+    const btnDetailed = document.getElementById('detailed-view');
+    const btnSimple = document.getElementById('general-view');
+    const boxSimple = document.getElementById('folder-box');
+    const boxDetailed = document.getElementById('file-table');
 
     function setActiveView(view) {
-        fetch("", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "active_view=" + view
-        });
+        if (view === 'detailed') {
+            boxSimple.classList.remove('show');
+            boxSimple.classList.add('hide');
+            boxDetailed.classList.remove('hide');
+            boxDetailed.classList.add('show');
+
+            btnDetailed.classList.add('active');
+            btnSimple.classList.remove('active');
+        } else {
+            boxSimple.classList.remove('hide');
+            boxSimple.classList.add('show');
+            boxDetailed.classList.remove('show');
+            boxDetailed.classList.add('hide');
+
+            btnDetailed.classList.remove('active');
+            btnSimple.classList.add('active');
+        }
     }
+
+    // Evitar navegación con enlaces y manejar con JS
+    btnDetailed.addEventListener('click', function (e) {
+        e.preventDefault();
+        setActiveView('detailed');
+        history.replaceState(null, '', '?view=detailed');
     });
+
+    btnSimple.addEventListener('click', function (e) {
+        e.preventDefault();
+        setActiveView('simple');
+        history.replaceState(null, '', '?view=general');
+    });
+});
 </script>
+
+
+<!-- Ordenado y filtrado================================================================== -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 const table = document.getElementById('file-table');
