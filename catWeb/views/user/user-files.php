@@ -15,6 +15,13 @@
     $user_details = get_user_details($username,$con);
     $folder_details = get_folder_details($folder_selected,$con);
 
+    if (isset($_GET['view'])) {
+        if ($_GET['view'] === 'detailed') {
+            $_SESSION['active_view'] = 'detailed';
+        } else {
+            $_SESSION['active_view'] = 'simple';
+        }
+    }
     $active_view = $_SESSION['active_view'] ?? 'simple';
 ?>
 
@@ -127,11 +134,6 @@
                         id="detailed-view" title="Vista detallada"><img src="../../icons/detailed-view.png"></a>
                 </div>
 
-                <div class="folder-box <?= $active_view === 'simple' ? 'show' : '' ?>" id="folder-box">
-
-                    <?php get_files($_SESSION['is_admin'],$folder_details['id'],$con) ?>
-
-                </div>
                 <div class="folder-box <?= $active_view === 'simple' ? 'show' : '' ?>" id="folder-box">
 
                     <?php get_files($_SESSION['is_admin'],$folder_details['id'],$con) ?>

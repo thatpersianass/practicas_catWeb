@@ -4,6 +4,13 @@
     include('../../functions/get_details.php');
     include('../../functions/get_files_folders.php');
 
+    if (isset($_GET['view'])) {
+        if ($_GET['view'] === 'detailed') {
+            $_SESSION['active_view'] = 'detailed';
+        } else {
+            $_SESSION['active_view'] = 'simple';
+        }
+    }
     $active_view = $_SESSION['active_view'] ?? 'simple'; // Valor por defecto: 'simple'
 
     $username = $_SESSION['username'];
@@ -409,8 +416,7 @@ $(document).ready(function() {
 
     $("#search-usr").keyup(function() {
         var input = $(this).val();
-        var folder_id = "<?php echo $folder_details['id'] ?? ''; ?>";
-
+        var folder_id = "<?php echo $folder_details['id']; ?>";
         if (input != "") {
             // Saber qué vista está activa
             var activeView = "<?php echo $_SESSION['active_view'] ?? 'simple'; ?>";
@@ -500,7 +506,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const boxDetailed = document.getElementById('file-table');
     const btnCSV = document.getElementById('export-csv');
     const btnPDF = document.getElementById('export-pdf');
-
+    
     function setActiveView(view) {
         if (view === 'detailed') {
             boxSimple.classList.remove('show');
@@ -512,8 +518,8 @@ document.addEventListener("DOMContentLoaded", function () {
             btnSimple.classList.remove('active');
 
             btnCSV.classList.remove('hide');
-            btnCSV.classList.add('show');
             btnPDF.classList.remove('hide');
+            btnCSV.classList.add('show');
             btnPDF.classList.add('show');
         } else {
             boxSimple.classList.remove('hide');
@@ -525,33 +531,23 @@ document.addEventListener("DOMContentLoaded", function () {
             btnSimple.classList.add('active');
 
             btnCSV.classList.remove('show');
-            btnCSV.classList.add('hide');
             btnPDF.classList.remove('show');
+            btnCSV.classList.add('hide');
             btnPDF.classList.add('hide');
         }
     }
 
-    // Obtener la vista desde la URL
-    function getViewFromURL() {
-        const params = new URLSearchParams(window.location.search);
-        const view = params.get('view');
-        if (view === 'detailed' || view === 'general') {
-            return view === 'detailed' ? 'detailed' : 'simple';
-        }
-        return 'simple'; // valor por defecto
-    }
-
-    // Al cargar la página, aplicar vista según URL
-    setActiveView(getViewFromURL());
-
+    // Evitar navegación con enlaces y manejar con JS
     btnDetailed.addEventListener('click', function (e) {
         e.preventDefault();
+        setActiveView('detailed');
         history.replaceState(null, '', '?view=detailed');
         location.reload();
     });
 
     btnSimple.addEventListener('click', function (e) {
         e.preventDefault();
+        setActiveView('simple');
         history.replaceState(null, '', '?view=general');
         location.reload();
     });
