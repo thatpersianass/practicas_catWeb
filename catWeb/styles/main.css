@@ -276,7 +276,7 @@ header {
     color: black;
 }
 
-/* Muestra de usuarios */
+/* Muestra de usuarios ==========================================================*/
 
 .user-display-box {
     display: flex;
@@ -422,7 +422,7 @@ header {
     /* width: 100px; */
 }
 
-/* Vista detallada */
+/* Vista detallada ==========================================================*/
 
 .folder-box-details {
     display: none;
@@ -484,7 +484,7 @@ header {
     margin: 10px 0 15px 0;
     gap: 5px;
 }
-/* Boton de añadir */
+/* Boton de añadir ==========================================================*/
 .add-button {
     display: flex;
     align-items: center;
@@ -523,7 +523,7 @@ header {
     border-radius: 10px;
 }
 
-/* Modal */
+/* Modal ==========================================================*/
 .modal-container {
     background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
@@ -768,7 +768,6 @@ header {
     }
 
     .admin-dashboard {
-        /* margin-top: 120px; */
         width: 80vw;
     }
 
