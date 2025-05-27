@@ -407,7 +407,7 @@ document.getElementById("export-pdf").addEventListener("click", function(e) {
 <script type="text/javascript" src="../../scripts/drag-file.js"></script>
 <script type="text/javascript" src="../../scripts/file-modal.js"></script>
 <script type="text/javascript" src="../../scripts/preview-modal.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
 <!-- Busqueda de archivos ========================================================== -->

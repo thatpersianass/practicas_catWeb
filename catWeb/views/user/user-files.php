@@ -190,7 +190,7 @@
 </body>
 <script type="text/javascript" src="../../scripts/preview-modal.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
 <!-- Busqueda de archivos ========================================================== -->
@@ -354,29 +354,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- Exportar a PDF ======================================================= -->
 <script>
-document.getElementById("export-pdf").addEventListener("click", function(e) {
+document.getElementById("export-pdf").addEventListener("click", async function (e) {
     e.preventDefault();
 
+    // Acceder correctamente al módulo jsPDF
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
     const table = document.querySelector("#file-table table");
     if (!table) return alert("No se encontró la tabla para exportar.");
 
-    // Obtener headers (sin columna Acciones)
     let headers = [];
     table.querySelectorAll("thead tr th").forEach((th, i, arr) => {
-        if (i < arr.length - 1) { // excluye última columna
+        if (i < arr.length - 1) {
             headers.push(th.innerText.trim());
         }
     });
 
-    // Obtener filas de datos (sin columna Acciones)
     let data = [];
     table.querySelectorAll("tbody tr").forEach(row => {
         let rowData = [];
         const cols = row.querySelectorAll("td");
-        for (let i = 0; i < cols.length - 1; i++) { // excluye última columna
+        for (let i = 0; i < cols.length - 1; i++) {
             rowData.push(cols[i].innerText.trim());
         }
         data.push(rowData);
