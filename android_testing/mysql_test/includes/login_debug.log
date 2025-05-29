@@ -1,0 +1,12 @@
+Array
+(
+    [password] => 1234
+    [email] => carlospd
+)
+SELECT * FROM users WHERE email = 'carlospd' AND password = '81dc9bdb52d04dc20036dbd8313ed055'
+Array
+(
+    [password] => 1234
+    [email] => carlospd@gmail.com
+)
+SELECT * FROM users WHERE email = 'carlospd@gmail.com' AND password = '81dc9bdb52d04dc20036dbd8313ed055'
