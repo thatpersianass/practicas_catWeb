@@ -1,0 +1,24 @@
+Array
+(
+    [password] => admin
+    [username] => admin
+)
+SELECT * FROM users WHERE username = 'admin'
+Array
+(
+    [password] => admin
+    [username] => admin
+)
+SELECT * FROM users WHERE username = 'admin'
+Array
+(
+    [password] => admin
+    [username] => admin
+)
+SELECT * FROM users WHERE username = 'admin'
+Array
+(
+    [password] => 3003
+    [username] => marcosj
+)
+SELECT * FROM users WHERE username = 'marcosj'

@@ -10,3 +10,9 @@ Array
     [email] => carlospd@gmail.com
 )
 SELECT * FROM users WHERE email = 'carlospd@gmail.com' AND password = '81dc9bdb52d04dc20036dbd8313ed055'
+Array
+(
+    [password] => 3003
+    [email] => marcosjavierpgomez@gmail.com
+)
+SELECT * FROM users WHERE email = 'marcosjavierpgomez@gmail.com' AND password = 'a4380923dd651c195b1631af7c829187'
