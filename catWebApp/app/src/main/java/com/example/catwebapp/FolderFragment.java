@@ -16,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,13 +24,8 @@ import java.util.List;
 
 public class FolderFragment extends Fragment {
 
-    private RecyclerView recyclerFolders;
     private FolderAdapter adapter;
     private List<Folder> folderList;
-
-    private int userId;
-    private final String BASE_URL = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/android/get_folders.php?user_id=";
-    private String username;
 
     public FolderFragment() {}
 
@@ -45,11 +39,7 @@ public class FolderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (getArguments() != null) {
-            userId = getArguments().getInt("user_id");
-        }
-
-        recyclerFolders = view.findViewById(R.id.recyclerFolders);
+        RecyclerView recyclerFolders = view.findViewById(R.id.recyclerFolders);
         recyclerFolders.setLayoutManager(new LinearLayoutManager(getContext()));
 
         folderList = new ArrayList<>();

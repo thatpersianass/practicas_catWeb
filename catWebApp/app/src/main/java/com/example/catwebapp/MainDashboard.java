@@ -1,5 +1,6 @@
 package com.example.catwebapp;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainDashboard extends AppCompatActivity  {
     Dialog dialog;
     Button buttonDialogCancel, buttonDialogConfirm;
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class MainDashboard extends AppCompatActivity  {
         dialog.setContentView(R.layout.exit_confirmation_modal);
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.glass_background));
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
 
         buttonDialogConfirm = dialog.findViewById(R.id.buttonDialogConfirm);
         buttonDialogCancel = dialog.findViewById(R.id.buttonDialogCancel);

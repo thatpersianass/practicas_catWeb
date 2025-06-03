@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderViewHolder> {
 
-    private List<Folder> folderList;
+    private final List<Folder> folderList;
 
     public FolderAdapter(List<Folder> folderList) {
         this.folderList = folderList;
