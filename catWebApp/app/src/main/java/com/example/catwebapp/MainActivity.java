@@ -13,6 +13,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -42,45 +45,56 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void login(View view){
+    public void login(View view) {
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString().trim();
-        if(!username.isEmpty() && !password.isEmpty()){
+
+        if (!username.isEmpty() && !password.isEmpty()) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
                 Log.d("LOGIN_RESPONSE", response);
 
-                switch (response) {
-                    case "success admin": {
-                        Toast.makeText(MainActivity.this, "No se puede iniciar como administrador en esta aplicación, visite la página web", Toast.LENGTH_LONG).show();
-                        break;
-                    }
-                    case "success user":
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+
+                    if (status.equals("success admin")) {
+                        Toast.makeText(MainActivity.this, "No se puede iniciar como administrador en esta aplicación", Toast.LENGTH_LONG).show();
+                    } else if (status.equals("success user")) {
+                        String userId = jsonObject.getString("user_id");
+                        String username = jsonObject.getString("username");
+
+                        // Guardar globalmente
+                        UserSession.getInstance().setUser(userId, username);
+
                         Toast.makeText(MainActivity.this, "Bienvenid@ " + username + "!", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(MainActivity.this, MainDashboard.class);
-                        intent.putExtra("username", username);
                         startActivity(intent);
                         finish();
-                        break;
-
-                    case "failure":
-                        Toast.makeText(MainActivity.this, "Usuario o Contraseña Incorrectos", Toast.LENGTH_SHORT).show();
-                        break;
+                    } else {
+                        Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Error al procesar la respuesta", Toast.LENGTH_SHORT).show();
                 }
-            }, error -> Toast.makeText(MainActivity.this, error.toString().trim(), Toast.LENGTH_SHORT).show()){
+            }, error -> {
+                Toast.makeText(MainActivity.this, "Error de red: " + error.toString().trim(), Toast.LENGTH_SHORT).show();
+            }) {
                 @Override
                 protected Map<String, String> getParams() {
-                    Map<String,String> data = new HashMap<>();
-                    data.put("username",username);
-                    data.put("password",password);
+                    Map<String, String> data = new HashMap<>();
+                    data.put("username", username);
+                    data.put("password", password);
                     return data;
                 }
             };
+
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             requestQueue.add(stringRequest);
 
         } else {
-            Toast.makeText(this,"Rellene todos los campos", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
         }
     }
 }

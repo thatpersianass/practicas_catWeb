@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.catwebapp.databinding.DashboardMainBinding;
 
+import java.util.Objects;
+
 public class MainDashboard extends AppCompatActivity  {
 
     DashboardMainBinding binding;
@@ -30,31 +32,21 @@ public class MainDashboard extends AppCompatActivity  {
         setContentView(binding.getRoot());
         replaceFragment(new FolderFragment());
 
-        String username = getIntent().getStringExtra("username");
+        String username = UserSession.getInstance().getUsername();
         binding.tvWelcome.setText("Bienvenid@ " + username);
 
         dialog = new Dialog(MainDashboard.this);
         dialog.setContentView(R.layout.exit_confirmation_modal);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.glass_background));
         dialog.setCancelable(false);
 
         buttonDialogConfirm = dialog.findViewById(R.id.buttonDialogConfirm);
         buttonDialogCancel = dialog.findViewById(R.id.buttonDialogCancel);
 
-        buttonDialogCancel.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        buttonDialogCancel.setOnClickListener(v -> dialog.dismiss());
 
-        buttonDialogConfirm.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                finishAffinity();
-            }
-        });
+        buttonDialogConfirm.setOnClickListener(v -> finishAffinity());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
