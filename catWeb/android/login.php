@@ -6,7 +6,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
     $username = $_POST['username'];
     $passwd = $_POST['password'];
     $sql = "SELECT * FROM users WHERE username = '$username'";
-    // file_put_contents("login_debug.log", $sql . "\n", FILE_APPEND);
+    // file_put_contents("login_debug.log", $sql . "\n", FILE_APPEND); '
     $result = $con->query($sql);
 
     if($result->num_rows > 0){
