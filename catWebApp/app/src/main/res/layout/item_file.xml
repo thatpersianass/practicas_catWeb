@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="24dp"
+    android:gravity="center_vertical"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/glass_background">
+
+    <ImageView
+        android:id="@+id/iconFile"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/outline_audio_file_24"
+        app:tint="#48D351" />
+
+    <!-- Nombre del archivo -->
+    <TextView
+        android:id="@+id/tvFileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nombre del Archivo"
+        android:textSize="20sp"
+        android:paddingStart="16dp"
+        tools:ignore="RtlSymmetry" />
+
+    <!-- Botón de descarga -->
+    <ImageButton
+        android:id="@+id/btnDownload"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:src="@drawable/outline_arrow_cool_down_24"
+        app:tint="#48D351" />
+
+</LinearLayout>

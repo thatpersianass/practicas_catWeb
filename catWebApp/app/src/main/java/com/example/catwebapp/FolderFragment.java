@@ -46,10 +46,28 @@ public class FolderFragment extends Fragment {
         adapter = new FolderAdapter(folderList);
         recyclerFolders.setAdapter(adapter);
 
+        adapter.setOnFolderClickListener(folder -> {
+            int folderId = folder.getId();
+            String folderName = folder.getName();
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("folder_id", folderId);
+            bundle.putString("folder_name", folderName);
+
+            FilesFragment fileFragment = new FilesFragment();
+            fileFragment.setArguments(bundle);
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, fileFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
         loadFolders();
     }
     private void loadFolders() {
-        String userId = UserSession.getInstance().getUserId();  // Obtener el userId dinámicamente
+        String userId = UserSession.getInstance().getUserId();
         String URL = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/android/get_folders.php?user_id=" + userId;
 
         RequestQueue queue = Volley.newRequestQueue(requireContext());

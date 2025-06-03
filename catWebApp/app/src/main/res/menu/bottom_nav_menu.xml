@@ -5,10 +5,6 @@
         android:icon="@drawable/baseline_home_24"
         android:id="@+id/homeBtn"/>
 
-    <item android:title="Archivos"
-        android:icon="@drawable/baseline_file_copy_24"
-        android:id="@+id/filesBtn"/>
-
     <item android:title="Salir"
         android:icon="@drawable/baseline_exit_to_app_24"
         android:id="@+id/exitBtn"/>

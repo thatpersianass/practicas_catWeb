@@ -13,6 +13,15 @@ import java.util.List;
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderViewHolder> {
 
     private final List<Folder> folderList;
+    private OnFolderClickListener listener;
+
+    public interface OnFolderClickListener {
+        void onFolderClick(Folder folder);
+    }
+
+    public void setOnFolderClickListener(OnFolderClickListener listener) {
+        this.listener = listener;
+    }
 
     public FolderAdapter(List<Folder> folderList) {
         this.folderList = folderList;
@@ -29,6 +38,12 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderView
     public void onBindViewHolder(@NonNull FolderViewHolder holder, int position) {
         Folder folder = folderList.get(position);
         holder.tvFolderName.setText(folder.getName());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onFolderClick(folder);
+            }
+        });
     }
 
     @Override

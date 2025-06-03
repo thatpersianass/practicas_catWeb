@@ -56,8 +56,6 @@ public class MainDashboard extends AppCompatActivity  {
 
             if (id == R.id.homeBtn) {
                 replaceFragment(new FolderFragment());
-            } else if (id == R.id.filesBtn) {
-                replaceFragment(new FilesFragment());
             } else if (id == R.id.exitBtn) {
                 dialog.show();
             }

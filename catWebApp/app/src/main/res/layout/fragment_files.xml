@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -43,6 +43,17 @@
                 android:id="@+id/recyclerFiles"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Esta carpeta está vacía"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:visibility="gone"
+                android:layout_gravity="center" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
