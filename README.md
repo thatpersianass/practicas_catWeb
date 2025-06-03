@@ -33,7 +33,7 @@ practicas_catWeb/
 
 ## ⚙️ Getting Set Up
 
-1. **Clone it like a pro**:
+1. **Clone it**:
 
    ```bash
    git clone https://github.com/thatpersianass/practicas_catWeb.git
