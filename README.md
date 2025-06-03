@@ -1,12 +1,12 @@
 # 🗂️ practicas_catWeb
 
-This is the project i build 'bout my internship. A hybrid project with both a web app and an Android app for managing folders and files —
+This is the project i build 'bout my internship on May-June 2025. A hybrid project with both a web app and an Android app for managing folders and files
 
 ## 🧠 What’s This All About?
 
 This repo has the following:
 
-- **Web App (PHP)**: Old-school but gold. Built with PHP, HTML, CSS, and JS to handle folders and files from any browser.
+- **Web App (PHP)**: Built with PHP, HTML, CSS, and JS to handle folders and files from any browser.
 - **Android App (Java)**: A native app for Android users to manage the same stuff on the go.
 - **Database**: MySQL handling all the data so you don’t have to.
 
@@ -33,7 +33,7 @@ practicas_catWeb/
 
 ## ⚙️ Getting Set Up
 
-1. **Clone it like a pro**:
+1. **Clone it**:
 
    ```bash
    git clone https://github.com/thatpersianass/practicas_catWeb.git
