@@ -30,6 +30,9 @@ public class MainDashboard extends AppCompatActivity  {
         setContentView(binding.getRoot());
         replaceFragment(new FolderFragment());
 
+        String username = getIntent().getStringExtra("username");
+        binding.tvWelcome.setText("Bienvenid@ " + username);
+
         dialog = new Dialog(MainDashboard.this);
         dialog.setContentView(R.layout.exit_confirmation_modal);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);

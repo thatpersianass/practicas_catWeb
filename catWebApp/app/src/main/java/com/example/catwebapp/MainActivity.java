@@ -51,19 +51,19 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (response) {
                     case "success admin": {
-                        Intent intent = new Intent(MainActivity.this, MainDashboard.class);
-                        startActivity(intent);
-                        finish();
+                        Toast.makeText(MainActivity.this, "No se puede iniciar como administrador en esta aplicación, visite la página web", Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "success user":
+                        Toast.makeText(MainActivity.this, "Bienvenid@ " + username + "!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, MainDashboard.class);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                         finish();
                         break;
 
                     case "failure":
-                        Toast.makeText(MainActivity.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Usuario o Contraseña Incorrectos", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }, error -> Toast.makeText(MainActivity.this, error.toString().trim(), Toast.LENGTH_SHORT).show()){
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             requestQueue.add(stringRequest);
 
         } else {
-            Toast.makeText(this,"Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Rellene todos los campos", Toast.LENGTH_SHORT).show();
 
         }
     }
