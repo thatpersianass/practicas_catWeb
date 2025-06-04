@@ -31,6 +31,14 @@
         android:paddingStart="16dp"
         tools:ignore="RtlSymmetry" />
 
+    <ImageButton
+        android:id="@+id/btnPreview"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:src="@drawable/outline_art_track_24"
+        app:tint="#48D351" />
+
     <!-- Botón de descarga -->
     <ImageButton
         android:id="@+id/btnDownload"

@@ -68,8 +68,9 @@ public class FilesFragment extends Fragment {
                             JSONObject obj = response.getJSONObject(i);
                             int id = obj.getInt("id");
                             String name = obj.getString("name");
+                            String realName = obj.getString("real_name");
 
-                            fileList.add(new File(id, name));
+                            fileList.add(new File(id, name, realName));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
