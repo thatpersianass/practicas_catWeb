@@ -10,7 +10,7 @@ $files = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $files[] = $row;
 }
-file_put_contents("files_debug.log", print_r($files, true), FILE_APPEND);
+// file_put_contents("files_debug.log", print_r($files, true), FILE_APPEND);
 
 header('Content-Type: application/json');
 echo json_encode($files);

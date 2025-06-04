@@ -1351,3 +1351,92 @@ Array
         )
 
 )
+Array
+(
+)
+Array
+(
+    [0] => Array
+        (
+            [id] => 25
+            [folder_id] => 11
+            [name] => Icono.png
+            [real_name] => 68402c366e5ec8.71586623.png
+            [size] => 404346
+            [type] => png
+            [created] => 2025-06-04 12:21:26
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [id] => 23
+            [folder_id] => 10
+            [name] => Factura.pdf
+            [real_name] => 682f35fa23d622.66436825.pdf
+            [size] => 100717
+            [type] => pdf
+            [created] => 2025-05-22 15:34:34
+        )
+
+    [1] => Array
+        (
+            [id] => 24
+            [folder_id] => 10
+            [name] => Meme.pdf
+            [real_name] => 683575e30842b5.17675822.pdf
+            [size] => 3523605
+            [type] => pdf
+            [created] => 2025-05-27 09:20:51
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [folder_id] => 4
+            [name] => Resume.pdf
+            [real_name] => 682eeb5e0ebf30.06959728.pdf
+            [size] => 43282
+            [type] => pdf
+            [created] => 2025-05-22 10:16:14
+        )
+
+    [1] => Array
+        (
+            [id] => 19
+            [folder_id] => 4
+            [name] => Imagen.png
+            [real_name] => 682efb0397f564.36258138.png
+            [size] => 6802
+            [type] => png
+            [created] => 2025-05-22 11:22:59
+        )
+
+    [2] => Array
+        (
+            [id] => 20
+            [folder_id] => 4
+            [name] => Cliente.jpg
+            [real_name] => 682efb15308a67.36177302.jpg
+            [size] => 25676
+            [type] => jpg
+            [created] => 2025-05-22 11:23:17
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [folder_id] => 4
+            [name] => Meme.pdf
+            [real_name] => 682f15f01514c4.60759289.pdf
+            [size] => 3523605
+            [type] => pdf
+            [created] => 2025-05-22 13:17:52
+        )
+
+)
