@@ -51,6 +51,7 @@
 
         <EditText
             android:id="@+id/etUsername"
+            android:tint="#626262"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -70,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:tint="#626262"
             android:hint="Introduzca su contraseña"
             android:inputType="textPassword"
             android:textColor="#60000000"

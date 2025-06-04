@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Inicio"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/home_icon"
         android:id="@+id/homeBtn"/>
 
     <item android:title="Salir"
-        android:icon="@drawable/baseline_exit_to_app_24"
+        android:icon="@drawable/exit_icon"
         android:id="@+id/exitBtn"/>
 </menu>

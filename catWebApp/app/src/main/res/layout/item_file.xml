@@ -17,7 +17,7 @@
         android:id="@+id/iconFile"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/outline_audio_file_24"
+        android:src="@drawable/file_icon"
         app:tint="#48D351" />
 
     <!-- Nombre del archivo -->
@@ -36,7 +36,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="?android:selectableItemBackgroundBorderless"
-        android:src="@drawable/outline_art_track_24"
+        android:contentDescription="TODO"
+        android:src="@drawable/preview_icon"
         app:tint="#48D351" />
 
     <!-- Botón de descarga -->
@@ -45,7 +46,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="?android:selectableItemBackgroundBorderless"
-        android:src="@drawable/outline_arrow_cool_down_24"
+        android:contentDescription="TODO"
+        android:src="@drawable/download_icon"
         app:tint="#48D351" />
 
 </LinearLayout>

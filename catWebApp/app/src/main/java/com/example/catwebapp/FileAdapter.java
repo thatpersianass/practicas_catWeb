@@ -4,6 +4,11 @@ import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -13,18 +18,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
-public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder> {
+public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder> implements Filterable {
     private final List<File> fileList;
-
+    private final List<File> fileListFull;
     public FileAdapter(List<File> fileList) {
         this.fileList = fileList;
-    }
-
+        this.fileListFull = new ArrayList<>(fileList);
+}
     @NonNull
     @Override
     public FileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,6 +91,46 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
                 window.setGravity(Gravity.CENTER);
             }
         });
+
+        holder.btnPreview.setOnClickListener(v -> {
+            Context context = v.getContext();
+            String url = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/uploads/" + file.getRealName();
+
+            if (file.getRealName().endsWith(".pdf")) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(url), "application/pdf");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                try {
+                    context.startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "No se encontró una aplicación para abrir PDFs", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_image_preview, null);
+                ImageView imageView = dialogView.findViewById(R.id.imageViewPreview);
+
+                Glide.with(context)
+                        .load(url)
+                        .into(imageView);
+
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setView(dialogView)
+                        .setNegativeButton("Cerrar", (d, which) -> d.dismiss())
+                        .create();
+
+                dialog.show();
+
+                Window window = dialog.getWindow();
+                if (window != null) {
+                    window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                }
+            }
+        });
+
+        Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.item_animation_fade_in);
+        holder.itemView.startAnimation(animation);
+
     }
 
     @Override
@@ -84,6 +138,47 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
         return fileList.size();
 
     }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull FileViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        holder.itemView.clearAnimation();
+    }
+
+        @Override
+        public Filter getFilter() {
+            return fileFilter;
+        }
+
+        private final Filter fileFilter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<File> filteredList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0) {
+                    filteredList.addAll(fileListFull);
+                } else {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+
+                    for (File item : fileListFull) {
+                        if (item.getName().toLowerCase().contains(filterPattern)) {
+                            filteredList.add(item);
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                fileList.clear();
+                fileList.addAll((List<File>) results.values);
+                notifyDataSetChanged();
+            }
+        };
 
     public static class FileViewHolder extends RecyclerView.ViewHolder {
         TextView tvFileName;

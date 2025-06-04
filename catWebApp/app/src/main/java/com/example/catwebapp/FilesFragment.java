@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,7 @@ public class FilesFragment extends Fragment {
 
     private FileAdapter adapter;
     private List<File> fileList;
-
+    private RecyclerView recyclerFiles;
     private TextView tvEmpty;
 
 
@@ -41,7 +42,7 @@ public class FilesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView tvTitle = view.findViewById(R.id.tvTitle);
-        RecyclerView recyclerFiles = view.findViewById(R.id.recyclerFiles);
+        recyclerFiles = view.findViewById(R.id.recyclerFiles);
         recyclerFiles.setLayoutManager(new LinearLayoutManager(getContext()));
         String folderName = getArguments() != null ? getArguments().getString("folder_name") : "Archivos";
         tvEmpty = view.findViewById(R.id.tvEmpty);
@@ -54,6 +55,22 @@ public class FilesFragment extends Fragment {
         if (folderId != -1) {
             loadFiles(folderId);
         }
+
+        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView.setIconifiedByDefault(false);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
     }
 
     private void loadFiles(int folderId) {
@@ -75,7 +92,9 @@ public class FilesFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                    adapter.notifyDataSetChanged();
+                    adapter = new FileAdapter(fileList);
+                    recyclerFiles.setAdapter(adapter);
+
 
                     if (fileList.isEmpty()) {
                         tvEmpty.setVisibility(View.VISIBLE);
