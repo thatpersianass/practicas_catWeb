@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilesFragment extends Fragment {
-
+    // Get the layout elements for the Files screen
     private FileAdapter adapter;
     private List<File> fileList;
     private RecyclerView recyclerFiles;
@@ -34,13 +34,14 @@ public class FilesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_files, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // Set the layout elements into vars
         TextView tvTitle = view.findViewById(R.id.tvTitle);
         recyclerFiles = view.findViewById(R.id.recyclerFiles);
         recyclerFiles.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -50,12 +51,14 @@ public class FilesFragment extends Fragment {
         adapter = new FileAdapter(fileList);
         recyclerFiles.setAdapter(adapter);
 
+        // Set the folder name
         tvTitle.setText(folderName);
         int folderId = getArguments() != null ? getArguments().getInt("folder_id") : -1;
         if (folderId != -1) {
             loadFiles(folderId);
         }
 
+        // Rules for the SearchBar on the FilesFragment
         SearchView searchView = view.findViewById(R.id.searchView);
         searchView.setIconifiedByDefault(false);
         searchView.clearFocus();
@@ -74,11 +77,14 @@ public class FilesFragment extends Fragment {
     }
 
     private void loadFiles(int folderId) {
+        // Set the URL of the server to connect into the database. You may change this to your own server
         String URL = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/android/get_files.php?folder_id=" + folderId;
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 
+        // Send the request to the server (PHP)
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL, null,
                 response -> {
+                    // Parse the JSON response
                     fileList.clear();
                     for (int i = 0; i < response.length(); i++) {
                         try {
@@ -86,7 +92,7 @@ public class FilesFragment extends Fragment {
                             int id = obj.getInt("id");
                             String name = obj.getString("name");
                             String realName = obj.getString("real_name");
-
+                            // Add the file to the list (RecyclerView)
                             fileList.add(new File(id, name, realName));
                         } catch (JSONException e) {
                             e.printStackTrace();

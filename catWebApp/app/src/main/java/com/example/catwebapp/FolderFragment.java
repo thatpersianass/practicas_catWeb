@@ -23,10 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FolderFragment extends Fragment {
-
+    // Get the layout elements for the Folder screen
     private FolderAdapter adapter;
     private List<Folder> folderList;
-
     public FolderFragment() {}
 
     @Override
@@ -39,6 +38,7 @@ public class FolderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Set the layout elements into vars
         RecyclerView recyclerFolders = view.findViewById(R.id.recyclerFolders);
         recyclerFolders.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -46,10 +46,12 @@ public class FolderFragment extends Fragment {
         adapter = new FolderAdapter(folderList);
         recyclerFolders.setAdapter(adapter);
 
+        // Set the folder click listener
         adapter.setOnFolderClickListener(folder -> {
             int folderId = folder.getId();
             String folderName = folder.getName();
 
+            // Send the folder data to the FilesFragment
             Bundle bundle = new Bundle();
             bundle.putInt("folder_id", folderId);
             bundle.putString("folder_name", folderName);
@@ -57,6 +59,7 @@ public class FolderFragment extends Fragment {
             FilesFragment fileFragment = new FilesFragment();
             fileFragment.setArguments(bundle);
 
+            // Replace the fragment in the Dashboard screen. In other word, change the screen elements
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_layout, fileFragment)
@@ -66,14 +69,18 @@ public class FolderFragment extends Fragment {
 
         loadFolders();
     }
+    // Pretty self explanatory isn't it?
     private void loadFolders() {
+        // Set the URL of the server to connect into the database. You may change this to your own server
         String userId = UserSession.getInstance().getUserId();
         String URL = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/android/get_folders.php?user_id=" + userId;
 
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 
+        // Send the request to the server (PHP)
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL, null,
                 response -> {
+            // Parse the JSON response
                     folderList.clear();
                     for (int i = 0; i < response.length(); i++) {
                         try {
@@ -81,6 +88,7 @@ public class FolderFragment extends Fragment {
                             int id = obj.getInt("id");
                             String name = obj.getString("name");
 
+                            // Add the folder to the list (RecyclerView)
                             folderList.add(new Folder(id, name));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -88,6 +96,7 @@ public class FolderFragment extends Fragment {
                     }
                     adapter.notifyDataSetChanged();
                 },
+                // If the request fails, show a toast message
                 error -> {
                     error.printStackTrace();
                 });

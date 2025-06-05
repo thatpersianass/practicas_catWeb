@@ -20,9 +20,8 @@ import com.example.catwebapp.databinding.DashboardMainBinding;
 import java.util.Objects;
 
 public class MainDashboard extends AppCompatActivity  {
-
+    // Get the layout elements for the Dashboard screen
     DashboardMainBinding binding;
-
     Dialog dialog;
     Button buttonDialogCancel, buttonDialogConfirm;
 
@@ -34,9 +33,11 @@ public class MainDashboard extends AppCompatActivity  {
         setContentView(binding.getRoot());
         replaceFragment(new FolderFragment());
 
+        // Set the welcome message on the topbar
         String username = UserSession.getInstance().getUsername();
         binding.tvWelcome.setText("Bienvenid@ " + username);
 
+        // Set the exit confirmation modal
         dialog = new Dialog(MainDashboard.this);
         dialog.setContentView(R.layout.exit_confirmation_modal);
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -46,6 +47,7 @@ public class MainDashboard extends AppCompatActivity  {
         buttonDialogConfirm = dialog.findViewById(R.id.buttonDialogConfirm);
         buttonDialogCancel = dialog.findViewById(R.id.buttonDialogCancel);
 
+        // Set the exit confirmation modal buttons
         buttonDialogCancel.setOnClickListener(v -> dialog.dismiss());
 
         buttonDialogConfirm.setOnClickListener(v -> finishAffinity());
@@ -64,6 +66,7 @@ public class MainDashboard extends AppCompatActivity  {
         });
     }
 
+    // Replace the fragment in the Dashboard screen. In other word, change the screen elements
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
