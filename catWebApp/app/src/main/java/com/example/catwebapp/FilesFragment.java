@@ -78,7 +78,7 @@ public class FilesFragment extends Fragment {
 
     private void loadFiles(int folderId) {
         // Set the URL of the server to connect into the database. You may change this to your own server
-        String URL = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/android/get_files.php?folder_id=" + folderId;
+        String URL = "http://10.0.0.26/practicas_catWeb/catWeb/android/get_files.php?folder_id=" + folderId;
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 
         // Send the request to the server (PHP)

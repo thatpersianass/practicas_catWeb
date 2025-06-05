@@ -72,7 +72,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
             dialogView.findViewById(R.id.buttonDialogConfirm).setOnClickListener(view -> {
                 dialog.dismiss();
 
-                String url = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/uploads/" + file.getRealName();
+                String url = "http://10.0.0.26/practicas_catWeb/catWeb/uploads/" + file.getRealName();
                 Log.d("DownloadURL", url);
 
                 // Set the download confirmation modal
@@ -103,7 +103,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
         holder.btnPreview.setOnClickListener(v -> {
             Context context = v.getContext();
             // Construct the full URL to the file on the server
-            String url = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/uploads/" + file.getRealName();
+            String url = "http://10.0.0.26/practicas_catWeb/catWeb/uploads/" + file.getRealName();
 
             // Check if the file is a PDF and open it with a PDF viewer
             if (file.getRealName().endsWith(".pdf")) {

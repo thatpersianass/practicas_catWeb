@@ -73,7 +73,7 @@ public class FolderFragment extends Fragment {
     private void loadFolders() {
         // Set the URL of the server to connect into the database. You may change this to your own server
         String userId = UserSession.getInstance().getUserId();
-        String URL = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/android/get_folders.php?user_id=" + userId;
+        String URL = "http://10.0.0.26/practicas_catWeb/catWeb/android/get_folders.php?user_id=" + userId;
 
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUsername, etPassword;
     private String username,password;
     // Set the URL of the server to connect into the database. You may change this to your own server
-    private final String URL = "http://10.0.0.26/PASANTIA_w3CAN/catWeb/android/login.php";
+    private final String URL = "http://10.0.0.26/practicas_catWeb/catWeb/android/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
